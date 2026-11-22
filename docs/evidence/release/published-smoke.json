@@ -1,0 +1,53 @@
+{
+  "time": "2026-11-22T04:35:12.035Z",
+  "url": "https://yongliancai.github.io/money/",
+  "sourceCommit": "3268c4e466d77bcb4a9064a77e9261bf11f9b404",
+  "results": [
+    {
+      "browser": "chromium",
+      "status": "PASS",
+      "url": "https://yongliancai.github.io/money/",
+      "scope": "https://yongliancai.github.io/money/",
+      "checks": [
+        "HTTPS 200",
+        "manifest/icons",
+        "no backend API",
+        "explicit confirmation",
+        "CRUD",
+        "monthly total",
+        "JSON export/import dedup",
+        "reload persistence",
+        "offline reload and entry",
+        "mobile layout"
+      ],
+      "failed": [],
+      "errors": [],
+      "api": []
+    },
+    {
+      "browser": "webkit",
+      "status": "PASS",
+      "url": "https://yongliancai.github.io/money/",
+      "scope": "https://yongliancai.github.io/money/",
+      "checks": [
+        "HTTPS 200",
+        "manifest/icons",
+        "no backend API",
+        "explicit confirmation",
+        "CRUD",
+        "monthly total",
+        "JSON export/import dedup",
+        "reload persistence",
+        "offline reload and entry",
+        "mobile layout"
+      ],
+      "failed": [],
+      "errors": [],
+      "api": []
+    }
+  ],
+  "limitations": [
+    "Desktop WebKit is not a real iPhone installation test.",
+    "Only synthetic data in fresh disposable browser contexts."
+  ]
+}

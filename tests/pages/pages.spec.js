@@ -91,12 +91,14 @@ test('manual CRUD persists after reload and monthly totals follow expense date u
   await load(page);
   await manual(page);
   await expect(page.locator('#month-total')).toHaveText('120');
+  await page.getByRole('button', { name: '消費紀錄' }).click();
   await page.getByRole('button', { name: '編輯 午餐', exact: true }).click();
   await page.locator('#amount').fill('150');
   await page
     .locator('#expense-form')
     .getByRole('button', { name: '確認儲存', exact: true })
     .click();
+  await page.getByRole('button', { name: '快速記帳' }).click();
   await expect(page.locator('#month-total')).toHaveText('150');
   const month = await page.locator('#month').inputValue();
   const date = new Date(`${month}-01T12:00:00Z`);
@@ -106,8 +108,10 @@ test('manual CRUD persists after reload and monthly totals follow expense date u
   await expect(page.locator('#month-total')).toHaveText('150');
   await page.reload();
   await expect(page.locator('#month-total')).toHaveText('150');
+  await page.getByRole('button', { name: '消費紀錄' }).click();
   await page.getByRole('button', { name: '刪除 午餐', exact: true }).click();
   await page.getByRole('button', { name: '確認刪除', exact: true }).click();
+  await page.getByRole('button', { name: '快速記帳' }).click();
   await expect(page.locator('#month-total')).toHaveText('0');
   await page.locator('#month').fill(previous.slice(0, 7));
   await expect(page.locator('#month-total')).toHaveText('999');
@@ -128,7 +132,7 @@ test('JSON and CSV exports, preview/cancel, restore and merge dedup work without
   const csv = await download(page, '下載 CSV');
   expect(csv).toContain('備份午餐');
   expect(csv).toContain('expenseDate');
-  await page.getByRole('button', { name: '記帳總覽' }).click();
+  await page.getByRole('button', { name: '消費紀錄' }).click();
   await page
     .getByRole('button', { name: '刪除 備份午餐', exact: true })
     .click();
@@ -147,7 +151,7 @@ test('JSON and CSV exports, preview/cancel, restore and merge dedup work without
   await page.locator('#import-file').setInputFiles(file);
   await expect(page.locator('#preview-note')).toContainText('跳過重複 1 筆');
   await page.getByRole('button', { name: '確認合併匯入' }).click();
-  await page.getByRole('button', { name: '記帳總覽' }).click();
+  await page.getByRole('button', { name: '快速記帳' }).click();
   await expect(page.locator('#month-total')).toHaveText('55');
   await expect(page.locator('#completion-title')).toHaveText('今天還沒記帳');
 });
@@ -222,7 +226,7 @@ test('explicit independent backend passes real CORS and AI preview gate, then de
   await expect(page.locator('#ai-mode')).toContainText('無法連接後端');
   await expect(page.locator('#subscribe-push')).toBeDisabled();
   await expect(page.locator('#parse-button')).toBeDisabled();
-  await page.getByRole('button', { name: '記帳總覽' }).click();
+  await page.getByRole('button', { name: '快速記帳' }).click();
   await manual(page, '後端失聯仍可記帳', '66');
   await expect(page.locator('#month-total')).toHaveText('66');
 });

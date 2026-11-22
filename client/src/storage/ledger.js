@@ -123,7 +123,7 @@ export async function openLedger(
     },
     async isCompleted() {
       const zone = (await settings()).timeZone;
-      const tx = db.transaction('activity');
+      const tx = db.transaction(['activity', 'dailyStatus']);
       return completed(tx, clock(), zone);
     },
     async saveSettings(input) {

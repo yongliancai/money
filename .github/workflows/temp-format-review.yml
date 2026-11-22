@@ -18,13 +18,13 @@ jobs:
       - run: npm ci
       - name: Format branch files in temporary checkout (no commit or push)
         run: |
-          npx prettier --write client/index.html client/src/features/analysis/analysis-ui.js client/src/features/analysis/analysis.js client/src/main.js client/src/storage/ledger.js client/src/ui.css docs/ANALYSIS-BATCH1.md shared/schemas/index.js tests/integration/analysis-ledger.test.js tests/unit/analysis.test.js
+          npx prettier --write client/index.html client/src/features/analysis/analysis-ui.js client/src/features/analysis/analysis.js client/src/main.js client/src/storage/ledger.js client/src/ui.css docs/ANALYSIS-BATCH1.md shared/schemas/index.js tests/integration/analysis-ledger.test.js tests/unit/analysis.test.js tests/pages/analysis.spec.js
       - name: Emit formatted source in read-only logs for review
         run: |
           python3 - <<'PY'
           from pathlib import Path
           from urllib.parse import quote
-          files = ['client/index.html', 'client/src/features/analysis/analysis-ui.js', 'client/src/features/analysis/analysis.js', 'client/src/main.js', 'client/src/storage/ledger.js', 'client/src/ui.css', 'docs/ANALYSIS-BATCH1.md', 'shared/schemas/index.js', 'tests/integration/analysis-ledger.test.js', 'tests/unit/analysis.test.js']
+          files = ['client/index.html', 'client/src/features/analysis/analysis-ui.js', 'client/src/features/analysis/analysis.js', 'client/src/main.js', 'client/src/storage/ledger.js', 'client/src/ui.css', 'docs/ANALYSIS-BATCH1.md', 'shared/schemas/index.js', 'tests/integration/analysis-ledger.test.js', 'tests/unit/analysis.test.js', 'tests/pages/analysis.spec.js']
           for path in files:
               value = quote(Path(path).read_text(), safe='')
               for pos in range(0, len(value), 1200):

@@ -4,6 +4,7 @@ import {
   expenseSchema,
   backupSchema,
   settingsSchema,
+  dateSchema,
 } from '../../../shared/schemas/index.js';
 import { localDate } from '../../../shared/dates.js';
 
@@ -129,8 +130,7 @@ export async function openLedger(
           (await tx.objectStore('settings').get('reminder')) || defaults;
         const today = localDate(now, config.timeZone);
         if (
-          !/^\d{4}-\d{2}-\d{2}$/.test(date) ||
-          Number.isNaN(new Date(date + 'T12:00:00Z').valueOf()) ||
+          !dateSchema.safeParse(date).success ||
           date > today
         )
           throw new Error('只能確認今天或過去的有效日期');

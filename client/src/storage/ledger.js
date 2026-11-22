@@ -103,11 +103,12 @@ export async function openLedger(
     async unlinkProduct(expenseId) {
       await db.delete('productLinks', expenseId);
     },
-    async confirmZeroSpend(date = localDate(clock(), (await settings()).timeZone)) {
+    async confirmZeroSpend(date) {
+      if (!date) date = localDate(clock(), (await settings()).timeZone);
       return mutate(async (tx, now) => {
         const config = (await tx.objectStore('settings').get('reminder')) || defaults;
         const today = localDate(now, config.timeZone);
-        if (!/^\\d{4}-\\d{2}-\\d{2}$/.test(date) || Number.isNaN(new Date(date + 'T12:00:00Z').valueOf()) || date > today) throw new Error('只能確認今天或過去的有效日期');
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || Number.isNaN(new Date(date + 'T12:00:00Z').valueOf()) || date > today) throw new Error('只能確認今天或過去的有效日期');
         const records = await tx.objectStore('expenses').getAll();
         if (records.some((e) => e.expenseDate === date)) throw new Error('這一天已有消費紀錄，不能標示零支出');
         await tx.objectStore('dailyStatus').put({date, confirmed:true, confirmedAt:now.toISOString()}, date);

@@ -4,9 +4,9 @@ Repository：yongliancai/money（原遠端 README：money）。
 
 正式網址：[日日記](https://yongliancai.github.io/money/)。使用者已批准第一版發布，最新部署驗證狀態見 [發布紀錄](docs/RELEASE.md)。
 
-免登入、單裝置、行動優先的本機帳本。完整帳本只保存在 IndexedDB，Express／SQLite 後端僅接收匿名裝置與提醒狀態。
+免登入、單裝置、行動優先的本機帳本。第一版帳本只保存在 IndexedDB，不需要後端；Repository 保留的 Express／SQLite 僅供後續整合研究與回歸測試。
 
-**第一版使用 JavaScript 規則解析，不使用 AI API 或後端定時推播。** 多行文字可離線解析，分類衝突由你選擇，所有候選都要確認後才儲存。目前未發布；完整交接與實測見 [第一版驗收](docs/V1-ACCEPTANCE.md)。
+**第一版使用 JavaScript 規則解析，不使用 AI API 或後端定時推播。** 多行文字可離線解析，分類衝突由你選擇，所有候選都要確認後才儲存。已於 2026-11-22 正式發布；完整交接與實測見 [第一版驗收](docs/V1-ACCEPTANCE.md) 與 [正式發布紀錄](docs/RELEASE.md)。
 
 ## 第一版快速使用
 
@@ -27,7 +27,7 @@ npm run preview:pages
 
 分類為餐飲、交通、購物、娛樂、學習、生活、其他；規則集中在 `client/src/features/quick-entry/classification-rules.js`。無法判定時不會自動選「其他」，必須在可編輯預覽選擇。今日新建紀錄計入完成；備份匯入不計入。帳本只在目前瀏覽器，請定期備份。
 
-## GitHub Pages 相容版（未發布）
+## GitHub Pages 第一版（已發布）
 
 目標倉庫 `yongliancai/money`，預設 Pages base `/money/`。第一版規則解析、手動記帳、統計、備份與離線 PWA 都可獨立使用；AI API 與背景推播不在第一版範圍。
 

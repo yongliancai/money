@@ -1,0 +1,19 @@
+
+> ai-bookkeeping-assistant@0.1.0 verify
+> npm run lint && npm run format:check && npm run guardrails && npm run docs:check && npm test && npm run build && npm run test:e2e
+
+
+> ai-bookkeeping-assistant@0.1.0 lint
+> eslint .
+
+
+> ai-bookkeeping-assistant@0.1.0 format:check
+> prettier --check .
+
+Checking formatting...
+All matched files use Prettier code style!
+
+> ai-bookkeeping-assistant@0.1.0 guardrails
+> node scripts/guardrails.mjs
+
+scripts/record-verification.mjs: 動態 require 不允許

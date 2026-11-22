@@ -1,0 +1,14 @@
+V1 executed repair and regression record (2026-11-22 Asia/Taipei).
+
+RED: existing Pages acceptance failed because #quick-input did not exist (exit 1).
+IMPLEMENT: local JavaScript multiline parser, centralized seven-category rules, editable review and explicit storage confirmation.
+Candidates with conflicts/unknown categories retain an empty required select; missing or invalid amount remains visible for manual repair.
+No database schema or backup format migration; manually confirmed local candidates use existing manual provenance.
+
+First full verification: all 51 program tests passed; legacy root E2E had 5 pass / 1 fail.
+Failure: route.fulfill did not intercept the AI request once Service Worker controlled the page, so the demo backend answered successfully.
+FIX: isolate only the HTTP error interception test with serviceWorkers:block, following Playwright guidance. Its original XSS, network-fallback, invalid-import and no-preview assertions remain.
+Worker installation, offline reload, data retention and cache updates remain enabled and independently tested in other cases.
+Targeted network-failure regression passed (exit 0). Original full failure output retained in legacy-route-failure.txt.
+
+All pre-existing tests retained. Pages fixture intentionally carries an old API URL to prove V1 ignores it; integration mode keeps independent backend compatibility regression outside the V1 public product.

@@ -1,0 +1,17 @@
+Observed changes and executed repair cycle; 2026-11-22 Asia/Taipei.
+
+P01 RED: original build failed /money/ Manifest contract (expected /money/, actual /; exit 1).
+FIX: derive Vite base from actual repository; rewrite all generated PWA paths; strict static E2E passes.
+
+P02 first Pages matrix: 8 passed / 2 failed.
+Chromium cache lifecycle assertion found both old and new scoped caches.
+FIX: fetch uses caches.match(cacheName) instead of opening a retired cache; wait for the real activation cleanup condition, preserving one-cache and neighbor-preservation assertions.
+WebKit route.abort did not consistently disconnect the backend while a worker controlled the page.
+FIX: loopback-only API test fixture actually destroys sockets, rather than relying on browser interception. Production API contains no test control endpoints.
+RERUN: 10/10 Pages tests passed on Chromium and WebKit.
+
+P03 lint found generated minified assets under .tmp/pages-connected (27 diagnostics).
+FIX: exclude only .tmp generated test output from ESLint, consistent with git/guardrail ignores; source lint rules unchanged. RERUN lint PASS.
+
+P04 defensive checks: backend identities isolated by URL; explicit origin CORS; failed configuration/timeout has no fake AI result; unknown VITE variables rejected by a real negative build.
+Unit, contract and integration suite: 45/45 PASS before final clean verification.

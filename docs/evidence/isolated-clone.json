@@ -1,0 +1,47 @@
+{
+  "recordedAt": "2026-11-21T23:57:00.854Z",
+  "baseline": "115e352",
+  "status": "PASS",
+  "results": [
+    {
+      "name": "local source clone",
+      "exitCode": 0,
+      "durationMs": 293
+    },
+    {
+      "name": "disconnect local origin",
+      "exitCode": 0,
+      "durationMs": 31
+    },
+    {
+      "name": "stage recovery probe",
+      "exitCode": 0,
+      "durationMs": 40
+    },
+    {
+      "name": "commit recovery probe",
+      "exitCode": 0,
+      "durationMs": 61
+    },
+    {
+      "name": "revert recovery probe",
+      "exitCode": 0,
+      "durationMs": 43
+    },
+    {
+      "name": "source matches baseline after revert",
+      "exitCode": 0,
+      "durationMs": 26
+    },
+    {
+      "name": "isolated npm ci",
+      "exitCode": 0,
+      "durationMs": 4723
+    },
+    {
+      "name": "isolated full verify",
+      "exitCode": 0,
+      "durationMs": 11001
+    }
+  ]
+}

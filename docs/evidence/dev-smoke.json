@@ -1,0 +1,12 @@
+{
+  "recordedAt": "2026-11-21T23:53:30.720Z",
+  "status": "PASS",
+  "health": {
+    "status": "ok",
+    "environment": "isolated",
+    "schemaVersion": 1
+  },
+  "devUrl": "http://127.0.0.1:5173",
+  "manualSaveTotal": 42,
+  "pageErrors": []
+}

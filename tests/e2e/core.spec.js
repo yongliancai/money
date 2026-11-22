@@ -22,15 +22,19 @@ test('manual CRUD, monthly total and today completion regression', async ({
   await manual(page);
   await expect(page.locator('#month-total')).toHaveText('120');
   await expect(page.locator('#completion-title')).toHaveText('今天已完成記帳');
+  await page.getByRole('button', { name: '消費紀錄' }).click();
   await page.getByRole('button', { name: '編輯 午餐', exact: true }).click();
   await page.locator('#amount').fill('150');
   await page
     .locator('#expense-form')
     .getByRole('button', { name: '確認儲存', exact: true })
     .click();
+  await page.getByRole('button', { name: '快速記帳' }).click();
   await expect(page.locator('#month-total')).toHaveText('150');
+  await page.getByRole('button', { name: '消費紀錄' }).click();
   await page.getByRole('button', { name: '刪除 午餐', exact: true }).click();
   await page.getByRole('button', { name: '確認刪除', exact: true }).click();
+  await page.getByRole('button', { name: '快速記帳' }).click();
   await expect(page.locator('#month-total')).toHaveText('0');
   await expect(page.locator('#completion-title')).toHaveText('今天還沒記帳');
 });
@@ -51,6 +55,7 @@ test('AI preview cancellation, editable fields, double confirmation and no pre-c
     .fill('130');
   await page.getByRole('button', { name: '確認儲存這些紀錄' }).click();
   await expect(page.locator('#month-total')).toHaveText('185');
+  await page.getByRole('button', { name: '消費紀錄' }).click();
   await expect(page.locator('#records .record')).toHaveCount(2);
 });
 test('JSON backup, deletion, restore warning, cancellation, dedup and import exclusion', async ({
@@ -63,7 +68,7 @@ test('JSON backup, deletion, restore warning, cancellation, dedup and import exc
   await page.getByRole('button', { name: '下載 JSON 備份' }).click();
   const download = await downloadPromise;
   const backupPath = await download.path();
-  await page.getByRole('button', { name: '記帳總覽' }).click();
+  await page.getByRole('button', { name: '消費紀錄' }).click();
   await page.getByRole('button', { name: '刪除 午餐', exact: true }).click();
   await page.getByRole('button', { name: '確認刪除', exact: true }).click();
   await page.getByRole('button', { name: '資料備份' }).click();
@@ -72,7 +77,7 @@ test('JSON backup, deletion, restore warning, cancellation, dedup and import exc
   await page.getByRole('button', { name: '取消', exact: true }).click();
   await page.locator('#import-file').setInputFiles(backupPath);
   await page.getByRole('button', { name: '確認合併匯入' }).click();
-  await page.getByRole('button', { name: '記帳總覽' }).click();
+  await page.getByRole('button', { name: '快速記帳' }).click();
   await expect(page.locator('#month-total')).toHaveText('120');
   await expect(page.locator('#completion-title')).toHaveText('今天還沒記帳');
   await page.getByRole('button', { name: '資料備份' }).click();

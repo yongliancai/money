@@ -129,10 +129,7 @@ export async function openLedger(
         const config =
           (await tx.objectStore('settings').get('reminder')) || defaults;
         const today = localDate(now, config.timeZone);
-        if (
-          !dateSchema.safeParse(date).success ||
-          date > today
-        )
+        if (!dateSchema.safeParse(date).success || date > today)
           throw new Error('只能確認今天或過去的有效日期');
         const records = await tx.objectStore('expenses').getAll();
         if (records.some((e) => e.expenseDate === date))

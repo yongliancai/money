@@ -1,0 +1,14 @@
+
+> ai-bookkeeping-assistant@0.1.0 build
+> vite build
+
+vite v8.3.8 building client environment for production...
+transforming...
+✓ 112 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                  19.62 kB │ gzip:  5.79 kB
+dist/assets/index-C2WfCH-Q.css   12.45 kB │ gzip:  3.61 kB
+dist/assets/index-COybVJ6y.js   132.05 kB │ gzip: 40.99 kB
+
+✓ built in 110ms

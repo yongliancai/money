@@ -44,13 +44,42 @@ export const expenseSchema = draftSchema
     schemaVersion: z.literal(1),
   })
   .strict();
-export const backupSchema = z
+const backupV1Schema = z
   .object({
     schemaVersion: z.literal(1),
     exportedAt: z.iso.datetime(),
     expenses: z.array(expenseSchema).max(20000),
   })
   .strict();
+const backupV2Schema = z
+  .object({
+    schemaVersion: z.literal(2),
+    exportedAt: z.iso.datetime(),
+    expenses: z.array(expenseSchema).max(20000),
+    zeroDays: z
+      .array(
+        z.object({ date: dateSchema, confirmed: z.literal(true) }).strict(),
+      )
+      .max(3660),
+    productLinks: z
+      .array(z.object({ expenseId: z.uuid(), productId: z.uuid() }).strict())
+      .max(20000),
+  })
+  .strict()
+  .superRefine((backup, context) => {
+    const records = new Set(backup.expenses.map((e) => e.id));
+    const linked = new Set();
+    for (const link of backup.productLinks) {
+      if (!records.has(link.expenseId) || linked.has(link.expenseId))
+        context.addIssue({
+          code: 'custom',
+          message: '商品對應必須指向備份中的紀錄，且每筆紀錄只能有一個商品群組',
+          path: ['productLinks'],
+        });
+      linked.add(link.expenseId);
+    }
+  });
+export const backupSchema = z.union([backupV1Schema, backupV2Schema]);
 export const aiResultSchema = z
   .object({
     drafts: z.array(draftSchema).max(50),

@@ -1,0 +1,679 @@
+{
+  "additionalFailures": [{"job":137222850646,"errors":["2026-11-22T13:24:49.6465341Z   106:55  error  Parsing error: Await expression cannot be a default value","2026-11-22T13:24:49.6992821Z ##[error]Process completed with exit code 1."]},{"job":137223158270,"errors":["2026-11-22T13:26:05.6887558Z ##[error]  3:3  error  'normaliseItem' is defined but never used  no-unused-vars","2026-11-22T13:26:05.6893581Z   106:55  error  Parsing error: Await expression cannot be a default value","2026-11-22T13:26:05.7236238Z ##[error]Process completed with exit code 1."]}],
+  "baseline": "fa222a612fc96f7fc627e31fc985b9b499837d47",
+  "runs": [
+    {
+      "id": 45028384490,
+      "url": "https://github.com/yongliancai/money/actions/runs/45028384490",
+      "event": "pull_request",
+      "name": "Quality checks (no deployment)",
+      "sha": "fa222a612fc96f7fc627e31fc985b9b499837d47",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 45028379868,
+      "url": "https://github.com/yongliancai/money/actions/runs/45028379868",
+      "event": "push",
+      "name": "Quality checks (no deployment)",
+      "sha": "fa222a612fc96f7fc627e31fc985b9b499837d47",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 45028369151,
+      "url": "https://github.com/yongliancai/money/actions/runs/45028369151",
+      "event": "pull_request",
+      "name": "Quality checks (no deployment)",
+      "sha": "846d55e920e7520724a3dafeb4392e8687ff6a51",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 45028364292,
+      "url": "https://github.com/yongliancai/money/actions/runs/45028364292",
+      "event": "push",
+      "name": "Quality checks (no deployment)",
+      "sha": "846d55e920e7520724a3dafeb4392e8687ff6a51",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 45028282917,
+      "url": "https://github.com/yongliancai/money/actions/runs/45028282917",
+      "event": "pull_request",
+      "name": "Quality checks (no deployment)",
+      "sha": "b9a14349ec1ea8a3e5e927e034d2e29164b8caa4",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 45028277936,
+      "url": "https://github.com/yongliancai/money/actions/runs/45028277936",
+      "event": "push",
+      "name": "Quality checks (no deployment)",
+      "sha": "b9a14349ec1ea8a3e5e927e034d2e29164b8caa4",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 45028246403,
+      "url": "https://github.com/yongliancai/money/actions/runs/45028246403",
+      "event": "pull_request",
+      "name": "Quality checks (no deployment)",
+      "sha": "f5f365672b918c306e820d653f5af79fe6bf0077",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 45028240968,
+      "url": "https://github.com/yongliancai/money/actions/runs/45028240968",
+      "event": "push",
+      "name": "Quality checks (no deployment)",
+      "sha": "f5f365672b918c306e820d653f5af79fe6bf0077",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 45028240980,
+      "url": "https://github.com/yongliancai/money/actions/runs/45028240980",
+      "event": "push",
+      "name": "Temporary formatting and validation (read only)",
+      "sha": "f5f365672b918c306e820d653f5af79fe6bf0077",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 45028082088,
+      "url": "https://github.com/yongliancai/money/actions/runs/45028082088",
+      "event": "pull_request",
+      "name": "Quality checks (no deployment)",
+      "sha": "3190865670d0b95646ac0b13bf748592608e4832",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 45028077682,
+      "url": "https://github.com/yongliancai/money/actions/runs/45028077682",
+      "event": "push",
+      "name": "Temporary formatting and validation (read only)",
+      "sha": "3190865670d0b95646ac0b13bf748592608e4832",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 45028077740,
+      "url": "https://github.com/yongliancai/money/actions/runs/45028077740",
+      "event": "push",
+      "name": "Quality checks (no deployment)",
+      "sha": "3190865670d0b95646ac0b13bf748592608e4832",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 45028012716,
+      "url": "https://github.com/yongliancai/money/actions/runs/45028012716",
+      "event": "pull_request",
+      "name": "Quality checks (no deployment)",
+      "sha": "b6417bdb6f161705b418198090213ccd97129b50",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 45028006692,
+      "url": "https://github.com/yongliancai/money/actions/runs/45028006692",
+      "event": "push",
+      "name": "Temporary formatting and validation (read only)",
+      "sha": "b6417bdb6f161705b418198090213ccd97129b50",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 45028006718,
+      "url": "https://github.com/yongliancai/money/actions/runs/45028006718",
+      "event": "push",
+      "name": "Quality checks (no deployment)",
+      "sha": "b6417bdb6f161705b418198090213ccd97129b50",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 45027958658,
+      "url": "https://github.com/yongliancai/money/actions/runs/45027958658",
+      "event": "pull_request",
+      "name": "Quality checks (no deployment)",
+      "sha": "ec970b75c390ed3ccded332db171632613ff0d09",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 45027952564,
+      "url": "https://github.com/yongliancai/money/actions/runs/45027952564",
+      "event": "push",
+      "name": "Quality checks (no deployment)",
+      "sha": "ec970b75c390ed3ccded332db171632613ff0d09",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 45027952603,
+      "url": "https://github.com/yongliancai/money/actions/runs/45027952603",
+      "event": "push",
+      "name": "Temporary formatting and validation (read only)",
+      "sha": "ec970b75c390ed3ccded332db171632613ff0d09",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 45027824358,
+      "url": "https://github.com/yongliancai/money/actions/runs/45027824358",
+      "event": "pull_request",
+      "name": "Quality checks (no deployment)",
+      "sha": "4ed3392ef90272a18d7412e45237001e9505fe36",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 45027818104,
+      "url": "https://github.com/yongliancai/money/actions/runs/45027818104",
+      "event": "push",
+      "name": "Temporary formatting and validation (read only)",
+      "sha": "4ed3392ef90272a18d7412e45237001e9505fe36",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 45027818004,
+      "url": "https://github.com/yongliancai/money/actions/runs/45027818004",
+      "event": "push",
+      "name": "Quality checks (no deployment)",
+      "sha": "4ed3392ef90272a18d7412e45237001e9505fe36",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 45027676003,
+      "url": "https://github.com/yongliancai/money/actions/runs/45027676003",
+      "event": "pull_request",
+      "name": "Quality checks (no deployment)",
+      "sha": "de8c3c896bd8c8adda7da6ae50c6b265ee5071ac",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 45027671905,
+      "url": "https://github.com/yongliancai/money/actions/runs/45027671905",
+      "event": "push",
+      "name": "Quality checks (no deployment)",
+      "sha": "de8c3c896bd8c8adda7da6ae50c6b265ee5071ac",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 45027634586,
+      "url": "https://github.com/yongliancai/money/actions/runs/45027634586",
+      "event": "pull_request",
+      "name": "Quality checks (no deployment)",
+      "sha": "3ae3c0b35e66e33be4991b210bbbed276fb5b48c",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 45027606395,
+      "url": "https://github.com/yongliancai/money/actions/runs/45027606395",
+      "event": "push",
+      "name": "Quality checks (no deployment)",
+      "sha": "3ae3c0b35e66e33be4991b210bbbed276fb5b48c",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 45027602977,
+      "url": "https://github.com/yongliancai/money/actions/runs/45027602977",
+      "event": "push",
+      "name": "Quality checks (no deployment)",
+      "sha": "211634bda0489dbfe1ed8d78e24bc7f9363c33d9",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 45027598689,
+      "url": "https://github.com/yongliancai/money/actions/runs/45027598689",
+      "event": "push",
+      "name": "Quality checks (no deployment)",
+      "sha": "480f15fb9b87ea14e40adc9755bdcb4c8aa1ecd6",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 45027535069,
+      "url": "https://github.com/yongliancai/money/actions/runs/45027535069",
+      "event": "push",
+      "name": "Quality checks (no deployment)",
+      "sha": "a0b95d7922f8440e014e0b0cc0cd653a5d1a475c",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 45027464433,
+      "url": "https://github.com/yongliancai/money/actions/runs/45027464433",
+      "event": "push",
+      "name": "Quality checks (no deployment)",
+      "sha": "1ce342ac467a6e5943a79aeaf2c51626a176f9dc",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 45027449173,
+      "url": "https://github.com/yongliancai/money/actions/runs/45027449173",
+      "event": "push",
+      "name": "Quality checks (no deployment)",
+      "sha": "e21ad133861fb60d191417d5975f7e002bcc69e9",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 45027428772,
+      "url": "https://github.com/yongliancai/money/actions/runs/45027428772",
+      "event": "push",
+      "name": "Quality checks (no deployment)",
+      "sha": "cb5861d2e730d002607a6189623539661ff2ccbc",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 45027402857,
+      "url": "https://github.com/yongliancai/money/actions/runs/45027402857",
+      "event": "push",
+      "name": "Quality checks (no deployment)",
+      "sha": "e547bed306deab7759af98788ffbf852a1af1ff0",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 45027399493,
+      "url": "https://github.com/yongliancai/money/actions/runs/45027399493",
+      "event": "push",
+      "name": "Quality checks (no deployment)",
+      "sha": "b8acda0c1a84aea1cf6d7e6f9ec65d429c17894e",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 45027350995,
+      "url": "https://github.com/yongliancai/money/actions/runs/45027350995",
+      "event": "push",
+      "name": "Quality checks (no deployment)",
+      "sha": "e638fadc7894d95fbc36d8e4f1feb266a970acfe",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 45027329086,
+      "url": "https://github.com/yongliancai/money/actions/runs/45027329086",
+      "event": "push",
+      "name": "Quality checks (no deployment)",
+      "sha": "9eee00fd785ff7971fce5e915b7178d8175660c5",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 45027301496,
+      "url": "https://github.com/yongliancai/money/actions/runs/45027301496",
+      "event": "push",
+      "name": "Quality checks (no deployment)",
+      "sha": "4fc289325b82342207f8401110d18af0945d6369",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 45027250884,
+      "url": "https://github.com/yongliancai/money/actions/runs/45027250884",
+      "event": "push",
+      "name": "Quality checks (no deployment)",
+      "sha": "6ca630eed5350f5fb52b07e4ff5774b683bf47f8",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 45027227532,
+      "url": "https://github.com/yongliancai/money/actions/runs/45027227532",
+      "event": "push",
+      "name": "Quality checks (no deployment)",
+      "sha": "c6b79274e9747eefafe551ad9b7832020b137222",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 45027188529,
+      "url": "https://github.com/yongliancai/money/actions/runs/45027188529",
+      "event": "push",
+      "name": "Quality checks (no deployment)",
+      "sha": "f45fd11aaba4a9a97b976dacb41c877119d85bd4",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 45027155308,
+      "url": "https://github.com/yongliancai/money/actions/runs/45027155308",
+      "event": "push",
+      "name": "Quality checks (no deployment)",
+      "sha": "479fd406b7bf857ff7ad8c17c679ca0563429861",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 45027118845,
+      "url": "https://github.com/yongliancai/money/actions/runs/45027118845",
+      "event": "push",
+      "name": "Quality checks (no deployment)",
+      "sha": "a6f45df0390b566fc8672b2f93012a6a4de50704",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "failures": [
+    {
+      "run": 45028369151,
+      "sha": "846d55e920e7520724a3dafeb4392e8687ff6a51",
+      "job": 137226260411,
+      "errors": [
+        "2026-11-22T13:37:48.3433920Z [\\u001b[33mwarn\\u001b[39m] client/src/storage/ledger.js",
+        "2026-11-22T13:37:48.9666207Z ##[error]Process completed with exit code 1."
+      ]
+    },
+    {
+      "run": 45028364292,
+      "sha": "846d55e920e7520724a3dafeb4392e8687ff6a51",
+      "job": 137226246277,
+      "errors": [
+        "2026-11-22T13:37:12.2679994Z [\\u001b[33mwarn\\u001b[39m] client/src/storage/ledger.js",
+        "2026-11-22T13:37:13.1285530Z ##[error]Process completed with exit code 1."
+      ]
+    },
+    {
+      "run": 45028277936,
+      "sha": "b9a14349ec1ea8a3e5e927e034d2e29164b8caa4",
+      "job": 137225980107,
+      "errors": [
+        "2026-11-22T13:36:19.6275866Z     Error: expect(locator).toContainText(expected) failed",
+        "2026-11-22T13:36:19.6669123Z ##[error]Process completed with exit code 1."
+      ]
+    },
+    {
+      "run": 45028082088,
+      "sha": "3190865670d0b95646ac0b13bf748592608e4832",
+      "job": 137225373126,
+      "errors": [
+        "2026-11-22T13:33:55.1265213Z [\\u001b[33mwarn\\u001b[39m] tests/pages/analysis.spec.js",
+        "2026-11-22T13:33:55.2742312Z ##[error]Process completed with exit code 1."
+      ]
+    },
+    {
+      "run": 45028077740,
+      "sha": "3190865670d0b95646ac0b13bf748592608e4832",
+      "job": 137225360600,
+      "errors": [
+        "2026-11-22T13:33:56.3597967Z [\\u001b[33mwarn\\u001b[39m] tests/pages/analysis.spec.js",
+        "2026-11-22T13:33:56.4621682Z ##[error]Process completed with exit code 1."
+      ]
+    },
+    {
+      "run": 45028012716,
+      "sha": "b6417bdb6f161705b418198090213ccd97129b50",
+      "job": 137225165403,
+      "errors": [
+        "2026-11-22T13:33:17.5693590Z [\\u001b[33mwarn\\u001b[39m] tests/pages/analysis.spec.js",
+        "2026-11-22T13:33:17.6950923Z ##[error]Process completed with exit code 1."
+      ]
+    },
+    {
+      "run": 45028006718,
+      "sha": "b6417bdb6f161705b418198090213ccd97129b50",
+      "job": 137225146922,
+      "errors": [
+        "2026-11-22T13:33:05.3125526Z [\\u001b[33mwarn\\u001b[39m] tests/pages/analysis.spec.js",
+        "2026-11-22T13:33:05.4553016Z ##[error]Process completed with exit code 1."
+      ]
+    },
+    {
+      "run": 45027824358,
+      "sha": "4ed3392ef90272a18d7412e45237001e9505fe36",
+      "job": 137224617066,
+      "errors": [
+        "2026-11-22T13:31:32.1920910Z [\\u001b[33mwarn\\u001b[39m] client/index.html",
+        "2026-11-22T13:31:32.2631041Z [\\u001b[33mwarn\\u001b[39m] client/src/features/analysis/analysis-ui.js",
+        "2026-11-22T13:31:32.2812756Z [\\u001b[33mwarn\\u001b[39m] client/src/features/analysis/analysis.js",
+        "2026-11-22T13:31:32.3444357Z [\\u001b[33mwarn\\u001b[39m] client/src/main.js",
+        "2026-11-22T13:31:32.3910656Z [\\u001b[33mwarn\\u001b[39m] client/src/storage/ledger.js",
+        "2026-11-22T13:31:32.4671911Z [\\u001b[33mwarn\\u001b[39m] client/src/ui.css",
+        "2026-11-22T13:31:32.4846733Z [\\u001b[33mwarn\\u001b[39m] docs/ANALYSIS-BATCH1.md",
+        "2026-11-22T13:31:32.7491985Z [\\u001b[33mwarn\\u001b[39m] shared/schemas/index.js",
+        "2026-11-22T13:31:32.8110930Z [\\u001b[33mwarn\\u001b[39m] tests/integration/analysis-ledger.test.js",
+        "2026-11-22T13:31:32.8734919Z [\\u001b[33mwarn\\u001b[39m] tests/unit/analysis.test.js",
+        "2026-11-22T13:31:32.9327510Z ##[error]Process completed with exit code 1."
+      ]
+    },
+    {
+      "run": 45027818004,
+      "sha": "4ed3392ef90272a18d7412e45237001e9505fe36",
+      "job": 137224599187,
+      "errors": [
+        "2026-11-22T13:31:20.3774424Z [\\u001b[33mwarn\\u001b[39m] client/index.html",
+        "2026-11-22T13:31:20.4935423Z [\\u001b[33mwarn\\u001b[39m] client/src/features/analysis/analysis-ui.js",
+        "2026-11-22T13:31:20.5214542Z [\\u001b[33mwarn\\u001b[39m] client/src/features/analysis/analysis.js",
+        "2026-11-22T13:31:20.6264087Z [\\u001b[33mwarn\\u001b[39m] client/src/main.js",
+        "2026-11-22T13:31:20.7012473Z [\\u001b[33mwarn\\u001b[39m] client/src/storage/ledger.js",
+        "2026-11-22T13:31:20.8173708Z [\\u001b[33mwarn\\u001b[39m] client/src/ui.css",
+        "2026-11-22T13:31:20.8486049Z [\\u001b[33mwarn\\u001b[39m] docs/ANALYSIS-BATCH1.md",
+        "2026-11-22T13:31:21.2541957Z [\\u001b[33mwarn\\u001b[39m] shared/schemas/index.js",
+        "2026-11-22T13:31:21.3502646Z [\\u001b[33mwarn\\u001b[39m] tests/integration/analysis-ledger.test.js",
+        "2026-11-22T13:31:21.4562769Z [\\u001b[33mwarn\\u001b[39m] tests/unit/analysis.test.js",
+        "2026-11-22T13:31:21.5410456Z ##[error]Process completed with exit code 1."
+      ]
+    },
+    {
+      "run": 45027676003,
+      "sha": "de8c3c896bd8c8adda7da6ae50c6b265ee5071ac",
+      "job": 137224160100,
+      "errors": [
+        "2026-11-22T13:29:52.3327071Z [\\u001b[33mwarn\\u001b[39m] client/index.html",
+        "2026-11-22T13:29:52.4215106Z [\\u001b[33mwarn\\u001b[39m] client/src/features/analysis/analysis-ui.js",
+        "2026-11-22T13:29:52.4514165Z [\\u001b[33mwarn\\u001b[39m] client/src/features/analysis/analysis.js",
+        "2026-11-22T13:29:52.5370153Z [\\u001b[33mwarn\\u001b[39m] client/src/main.js",
+        "2026-11-22T13:29:52.5915037Z [\\u001b[33mwarn\\u001b[39m] client/src/storage/ledger.js",
+        "2026-11-22T13:29:52.6819265Z [\\u001b[33mwarn\\u001b[39m] client/src/ui.css",
+        "2026-11-22T13:29:52.7038245Z [\\u001b[33mwarn\\u001b[39m] docs/ANALYSIS-BATCH1.md",
+        "2026-11-22T13:29:53.0256663Z [\\u001b[33mwarn\\u001b[39m] shared/schemas/index.js",
+        "2026-11-22T13:29:53.0914856Z [\\u001b[33mwarn\\u001b[39m] tests/integration/analysis-ledger.test.js",
+        "2026-11-22T13:29:53.1584791Z [\\u001b[33mwarn\\u001b[39m] tests/unit/analysis.test.js",
+        "2026-11-22T13:29:53.2309692Z ##[error]Process completed with exit code 1."
+      ]
+    },
+    {
+      "run": 45027671905,
+      "sha": "de8c3c896bd8c8adda7da6ae50c6b265ee5071ac",
+      "job": 137224147289,
+      "errors": [
+        "2026-11-22T13:29:30.0233940Z [\\u001b[33mwarn\\u001b[39m] client/index.html",
+        "2026-11-22T13:29:30.1154709Z [\\u001b[33mwarn\\u001b[39m] client/src/features/analysis/analysis-ui.js",
+        "2026-11-22T13:29:30.1374734Z [\\u001b[33mwarn\\u001b[39m] client/src/features/analysis/analysis.js",
+        "2026-11-22T13:29:30.2172146Z [\\u001b[33mwarn\\u001b[39m] client/src/main.js",
+        "2026-11-22T13:29:30.2799184Z [\\u001b[33mwarn\\u001b[39m] client/src/storage/ledger.js",
+        "2026-11-22T13:29:30.3678929Z [\\u001b[33mwarn\\u001b[39m] client/src/ui.css",
+        "2026-11-22T13:29:30.3871217Z [\\u001b[33mwarn\\u001b[39m] docs/ANALYSIS-BATCH1.md",
+        "2026-11-22T13:29:30.6999763Z [\\u001b[33mwarn\\u001b[39m] shared/schemas/index.js",
+        "2026-11-22T13:29:30.7584276Z [\\u001b[33mwarn\\u001b[39m] tests/integration/analysis-ledger.test.js",
+        "2026-11-22T13:29:30.8251759Z [\\u001b[33mwarn\\u001b[39m] tests/unit/analysis.test.js",
+        "2026-11-22T13:29:30.8945873Z ##[error]Process completed with exit code 1."
+      ]
+    },
+    {
+      "run": 45027634586,
+      "sha": "3ae3c0b35e66e33be4991b210bbbed276fb5b48c",
+      "job": 137224032150,
+      "errors": [
+        "2026-11-22T13:29:16.5977722Z ##[error]  3:3  error  'normaliseItem' is defined but never used  no-unused-vars",
+        "2026-11-22T13:29:16.5986963Z ✖ 1 problem (1 error, 0 warnings)",
+        "2026-11-22T13:29:16.6384806Z ##[error]Process completed with exit code 1."
+      ]
+    },
+    {
+      "run": 45027606395,
+      "sha": "3ae3c0b35e66e33be4991b210bbbed276fb5b48c",
+      "job": 137223942034,
+      "errors": [
+        "2026-11-22T13:28:54.2924137Z ##[error]  3:3  error  'normaliseItem' is defined but never used  no-unused-vars",
+        "2026-11-22T13:28:54.2931447Z ✖ 1 problem (1 error, 0 warnings)",
+        "2026-11-22T13:28:54.3406619Z ##[error]Process completed with exit code 1."
+      ]
+    },
+    {
+      "run": 45027602977,
+      "sha": "211634bda0489dbfe1ed8d78e24bc7f9363c33d9",
+      "job": 137223931165,
+      "errors": [
+        "2026-11-22T13:28:30.6523585Z ##[error]  3:3  error  'normaliseItem' is defined but never used  no-unused-vars",
+        "2026-11-22T13:28:30.6529565Z ✖ 1 problem (1 error, 0 warnings)",
+        "2026-11-22T13:28:30.6773646Z ##[error]Process completed with exit code 1."
+      ]
+    },
+    {
+      "run": 45027598689,
+      "sha": "480f15fb9b87ea14e40adc9755bdcb4c8aa1ecd6",
+      "job": 137223917593,
+      "errors": [
+        "2026-11-22T13:28:59.8446061Z ##[error]  3:3  error  'normaliseItem' is defined but never used  no-unused-vars",
+        "2026-11-22T13:28:59.8454769Z ✖ 1 problem (1 error, 0 warnings)",
+        "2026-11-22T13:28:59.8927139Z ##[error]Process completed with exit code 1."
+      ]
+    },
+    {
+      "run": 45027535069,
+      "sha": "a0b95d7922f8440e014e0b0cc0cd653a5d1a475c",
+      "job": 137223722440,
+      "errors": [
+        "2026-11-22T13:27:41.9116266Z ##[error]  3:3  error  'normaliseItem' is defined but never used  no-unused-vars",
+        "2026-11-22T13:27:41.9122744Z ✖ 1 problem (1 error, 0 warnings)",
+        "2026-11-22T13:27:41.9636870Z ##[error]Process completed with exit code 1."
+      ]
+    },
+    {
+      "run": 45027464433,
+      "sha": "1ce342ac467a6e5943a79aeaf2c51626a176f9dc",
+      "job": 137223505086,
+      "errors": [
+        "2026-11-22T13:27:08.9807225Z ##[error]  3:3  error  'normaliseItem' is defined but never used  no-unused-vars",
+        "2026-11-22T13:27:08.9814664Z ✖ 1 problem (1 error, 0 warnings)",
+        "2026-11-22T13:27:09.0044151Z ##[error]Process completed with exit code 1."
+      ]
+    },
+    {
+      "run": 45027449173,
+      "sha": "e21ad133861fb60d191417d5975f7e002bcc69e9",
+      "job": 137223458712,
+      "errors": [
+        "2026-11-22T13:26:55.9390527Z ##[error]  3:3  error  'normaliseItem' is defined but never used  no-unused-vars",
+        "2026-11-22T13:26:55.9398784Z ✖ 1 problem (1 error, 0 warnings)",
+        "2026-11-22T13:26:55.9970003Z ##[error]Process completed with exit code 1."
+      ]
+    },
+    {
+      "run": 45027428772,
+      "sha": "cb5861d2e730d002607a6189623539661ff2ccbc",
+      "job": 137223392854,
+      "errors": [
+        "2026-11-22T13:26:58.4158634Z ##[error]  3:3  error  'normaliseItem' is defined but never used  no-unused-vars",
+        "2026-11-22T13:26:58.4166761Z ✖ 1 problem (1 error, 0 warnings)",
+        "2026-11-22T13:26:58.4391857Z ##[error]Process completed with exit code 1."
+      ]
+    },
+    {
+      "run": 45027402857,
+      "sha": "e547bed306deab7759af98788ffbf852a1af1ff0",
+      "job": 137223314617,
+      "errors": [
+        "2026-11-22T13:26:12.7596076Z ##[error]  3:3  error  'normaliseItem' is defined but never used  no-unused-vars",
+        "2026-11-22T13:26:12.7607587Z ✖ 1 problem (1 error, 0 warnings)",
+        "2026-11-22T13:26:12.8220454Z ##[error]Process completed with exit code 1."
+      ]
+    },
+    {
+      "run": 45027399493,
+      "sha": "b8acda0c1a84aea1cf6d7e6f9ec65d429c17894e",
+      "job": 137223304806,
+      "errors": [
+        "2026-11-22T13:26:06.0403410Z ##[error]  3:3  error  'normaliseItem' is defined but never used  no-unused-vars",
+        "2026-11-22T13:26:06.0411273Z ✖ 1 problem (1 error, 0 warnings)",
+        "2026-11-22T13:26:06.0721826Z ##[error]Process completed with exit code 1."
+      ]
+    },
+    {
+      "run": 45027350995,
+      "sha": "e638fadc7894d95fbc36d8e4f1feb266a970acfe",
+      "job": 137223158270,
+      "errors": [
+        "2026-11-22T13:26:05.6887558Z ##[error]  3:3  error  'normaliseItem' is defined but never used  no-unused-vars",
+        "2026-11-22T13:26:05.6894274Z ✖ 2 problems (2 errors, 0 warnings)",
+        "2026-11-22T13:26:05.7236238Z ##[error]Process completed with exit code 1."
+      ]
+    },
+    {
+      "run": 45027329086,
+      "sha": "9eee00fd785ff7971fce5e915b7178d8175660c5",
+      "job": 137223088621,
+      "errors": [
+        "2026-11-22T13:25:17.9929197Z ##[error]  3:3  error  'normaliseItem' is defined but never used  no-unused-vars",
+        "2026-11-22T13:25:17.9937105Z ✖ 2 problems (2 errors, 0 warnings)",
+        "2026-11-22T13:25:18.0592785Z ##[error]Process completed with exit code 1."
+      ]
+    },
+    {
+      "run": 45027301496,
+      "sha": "4fc289325b82342207f8401110d18af0945d6369",
+      "job": 137223003301,
+      "errors": [
+        "2026-11-22T13:25:06.1492194Z ##[error]  3:3  error  'normaliseItem' is defined but never used  no-unused-vars",
+        "2026-11-22T13:25:06.1506970Z ✖ 2 problems (2 errors, 0 warnings)",
+        "2026-11-22T13:25:06.2059716Z ##[error]Process completed with exit code 1."
+      ]
+    },
+    {
+      "run": 45027250884,
+      "sha": "6ca630eed5350f5fb52b07e4ff5774b683bf47f8",
+      "job": 137222850646,
+      "errors": [
+        "2026-11-22T13:24:49.6466749Z ✖ 1 problem (1 error, 0 warnings)",
+        "2026-11-22T13:24:49.6992821Z ##[error]Process completed with exit code 1."
+      ]
+    },
+    {
+      "run": 45027227532,
+      "sha": "c6b79274e9747eefafe551ad9b7832020b137222",
+      "job": 137222772727,
+      "errors": [
+        "2026-11-22T13:24:14.2634415Z ✖ 1 problem (1 error, 0 warnings)",
+        "2026-11-22T13:24:14.3125314Z ##[error]Process completed with exit code 1."
+      ]
+    },
+    {
+      "run": 45027188529,
+      "sha": "f45fd11aaba4a9a97b976dacb41c877119d85bd4",
+      "job": 137222658069,
+      "errors": [
+        "2026-11-22T13:24:08.9138523Z [\\u001b[33mwarn\\u001b[39m] client/src/features/analysis/analysis.js",
+        "2026-11-22T13:24:09.6542711Z [\\u001b[33mwarn\\u001b[39m] shared/schemas/index.js",
+        "2026-11-22T13:24:09.8911415Z ##[error]Process completed with exit code 1."
+      ]
+    },
+    {
+      "run": 45027155308,
+      "sha": "479fd406b7bf857ff7ad8c17c679ca0563429861",
+      "job": 137222557634,
+      "errors": [
+        "2026-11-22T13:23:28.3492887Z [\\u001b[33mwarn\\u001b[39m] client/src/features/analysis/analysis.js",
+        "2026-11-22T13:23:29.2912003Z ##[error]Process completed with exit code 1."
+      ]
+    }
+  ]
+}

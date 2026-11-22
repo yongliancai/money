@@ -1,0 +1,474 @@
+
+> ai-bookkeeping-assistant@0.1.0 test
+> node --test tests/unit/*.test.js tests/integration/*.test.js tests/contracts/*.test.js
+
+TAP version 13
+# (node:25252) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: health, anonymous registration, hashed tokens, auth required and cross-device isolation
+ok 1 - health, anonymous registration, hashed tokens, auth required and cross-device isolation
+  ---
+  duration_ms: 91.2147
+  type: 'test'
+  ...
+# Subtest: API schema rejects expense payload, future timestamps, impossible dates and stale settings
+ok 2 - API schema rejects expense payload, future timestamps, impossible dates and stale settings
+  ---
+  duration_ms: 26.7386
+  type: 'test'
+  ...
+# Subtest: sync acknowledgements are idempotent and keep max revision
+ok 3 - sync acknowledgements are idempotent and keep max revision
+  ---
+  duration_ms: 15.9482
+  type: 'test'
+  ...
+# Subtest: AI route validates request and output; disabled provider fails with usable fallback
+ok 4 - AI route validates request and output; disabled provider fails with usable fallback
+  ---
+  duration_ms: 24.7618
+  type: 'test'
+  ...
+# Subtest: SSRF push endpoint guard, malformed JSON, body size, origin and security headers
+ok 5 - SSRF push endpoint guard, malformed JSON, body size, origin and security headers
+  ---
+  duration_ms: 21.1227
+  type: 'test'
+  ...
+# Subtest: registration rate limiter is enforced
+ok 6 - registration rate limiter is enforced
+  ---
+  duration_ms: 31.4551
+  type: 'test'
+  ...
+# Subtest: AI provider timeout returns 504 without writing any ledger data
+ok 7 - AI provider timeout returns 504 without writing any ledger data
+  ---
+  duration_ms: 23.6668
+  type: 'test'
+  ...
+# Subtest: independent HTTPS frontend CORS preflight is scoped to one approved origin and explicit headers
+ok 8 - independent HTTPS frontend CORS preflight is scoped to one approved origin and explicit headers
+  ---
+  duration_ms: 12.4899
+  type: 'test'
+  ...
+# Subtest: zero-spend confirmation counts today, cancellation removes completion, and rejects a dated expense
+ok 9 - zero-spend confirmation counts today, cancellation removes completion, and rejects a dated expense
+  ---
+  duration_ms: 41.9868
+  type: 'test'
+  ...
+# Subtest: new expense invalidates zero-day confirmation, imported record cannot count today completed
+ok 10 - new expense invalidates zero-day confirmation, imported record cannot count today completed
+  ---
+  duration_ms: 11.3729
+  type: 'test'
+  ...
+# Subtest: confirmed product links survive v2 backup, v1 remains importable
+ok 11 - confirmed product links survive v2 backup, v1 remains importable
+  ---
+  duration_ms: 14.9384
+  type: 'test'
+  ...
+# Subtest: database v1 upgrades in place without losing the expenses
+ok 12 - database v1 upgrades in place without losing the expenses
+  ---
+  duration_ms: 2.4142
+  type: 'test'
+  ...
+# Subtest: editing an old record onto today invalidates zero status and snapshots incomplete atomically
+ok 13 - editing an old record onto today invalidates zero status and snapshots incomplete atomically
+  ---
+  duration_ms: 48.1122
+  type: 'test'
+  ...
+# Subtest: import invalidates zero status and updates sync without creating completion activity
+ok 14 - import invalidates zero status and updates sync without creating completion activity
+  ---
+  duration_ms: 20.9285
+  type: 'test'
+  ...
+# Subtest: imported zero days never complete today after clock advance or timezone change
+ok 15 - imported zero days never complete today after clock advance or timezone change
+  ---
+  duration_ms: 12.6716
+  type: 'test'
+  ...
+# Subtest: renaming a linked item removes stale identity; amount/date edits keep explicit identity
+ok 16 - renaming a linked item removes stale identity; amount/date edits keep explicit identity
+  ---
+  duration_ms: 12.3113
+  type: 'test'
+  ...
+# Subtest: imported group identifier collision cannot silently join unrelated existing product
+ok 17 - imported group identifier collision cannot silently join unrelated existing product
+  ---
+  duration_ms: 11.321
+  type: 'test'
+  ...
+# Subtest: ambiguous or orphan backup relationships fail validation before any write
+ok 18 - ambiguous or orphan backup relationships fail validation before any write
+  ---
+  duration_ms: 6.9911
+  type: 'test'
+  ...
+# Subtest: same-day concurrent zero confirmation versus expense insert never leaves a conflict
+ok 19 - same-day concurrent zero confirmation versus expense insert never leaves a conflict
+  ---
+  duration_ms: 8.8903
+  type: 'test'
+  ...
+# Subtest: import failure rolls back expenses, zero status, product links, revisions and outbox; token can retry
+ok 20 - import failure rolls back expenses, zero status, product links, revisions and outbox; token can retry
+  ---
+  duration_ms: 7.2007
+  type: 'test'
+  ...
+# Subtest: v1 upgrade retains real records and activity and permits CRUD and v1/v2 round trips
+ok 21 - v1 upgrade retains real records and activity and permits CRUD and v1/v2 round trips
+  ---
+  duration_ms: 7.8706
+  type: 'test'
+  ...
+# Subtest: AI preview and cancel cannot save; confirmation commits only once under concurrent clicks
+ok 22 - AI preview and cancel cannot save; confirmation commits only once under concurrent clicks
+  ---
+  duration_ms: 44.5602
+  type: 'test'
+  ...
+# Subtest: today creation counts past expenseDate; createdAt immutable; editing older record never completes today
+ok 23 - today creation counts past expenseDate; createdAt immutable; editing older record never completes today
+  ---
+  duration_ms: 9.0833
+  type: 'test'
+  ...
+# Subtest: deleting all today-created records returns incomplete atomically with an outbox snapshot
+ok 24 - deleting all today-created records returns incomplete atomically with an outbox snapshot
+  ---
+  duration_ms: 9.7976
+  type: 'test'
+  ...
+# Subtest: backup preview, cancellation, restore disclosure, merge and dedup never mark today completed
+ok 25 - backup preview, cancellation, restore disclosure, merge and dedup never mark today completed
+  ---
+  duration_ms: 12.0284
+  type: 'test'
+  ...
+# Subtest: invalid batch aborts without partial records or outbox; import version and dates fail
+ok 26 - invalid batch aborts without partial records or outbox; import version and dates fail
+  ---
+  duration_ms: 6.1657
+  type: 'test'
+  ...
+# Subtest: backup restoration into a new database is lossless except import provenance, including Unicode
+ok 27 - backup restoration into a new database is lossless except import provenance, including Unicode
+  ---
+  duration_ms: 4.959
+  type: 'test'
+  ...
+# Subtest: shared IDB multi-connection writes serialize revisions; timezone recomputes active creation dates
+ok 28 - shared IDB multi-connection writes serialize revisions; timezone recomputes active creation dates
+  ---
+  duration_ms: 5.9003
+  type: 'test'
+  ...
+# Subtest: storage failure after expense insert rolls back expense, activity, revision and outbox together
+ok 29 - storage failure after expense insert rolls back expense, activity, revision and outbox together
+  ---
+  duration_ms: 5.4354
+  type: 'test'
+  ...
+# (node:30836) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: event duplicates and out-of-order revisions cannot overwrite latest completion (200 randomized sequences)
+ok 30 - event duplicates and out-of-order revisions cannot overwrite latest completion (200 randomized sequences)
+  ---
+  duration_ms: 190.4259
+  type: 'test'
+  ...
+# Subtest: two scheduler connections compete for a persistent unique daily claim; one attempt only
+ok 31 - two scheduler connections compete for a persistent unique daily claim; one attempt only
+  ---
+  duration_ms: 58.1176
+  type: 'test'
+  ...
+# Subtest: uncertain delivery is never retried; expired push subscriptions are removed
+ok 32 - uncertain delivery is never retried; expired push subscriptions are removed
+  ---
+  duration_ms: 2.0618
+  type: 'test'
+  ...
+# Subtest: unknown, stale, completed, timezone-revised and yesterday states never trigger a formal attempt
+ok 33 - unknown, stale, completed, timezone-revised and yesterday states never trigger a formal attempt
+  ---
+  duration_ms: 2.5095
+  type: 'test'
+  ...
+# Subtest: offline queued stale event uses occurrence time, never receipt time, for freshness
+ok 34 - offline queued stale event uses occurrence time, never receipt time, for freshness
+  ---
+  duration_ms: 1.6076
+  type: 'test'
+  ...
+# Subtest: network failure preserves unacknowledged outbox; retry clears acknowledged records only
+ok 35 - network failure preserves unacknowledged outbox; retry clears acknowledged records only
+  ---
+  duration_ms: 83.7466
+  type: 'test'
+  ...
+# Subtest: forged acknowledgement never removes the event
+ok 36 - forged acknowledgement never removes the event
+  ---
+  duration_ms: 6.4568
+  type: 'test'
+  ...
+# Subtest: settings changed during sync preserve new events and abort stale snapshot
+ok 37 - settings changed during sync preserve new events and abort stale snapshot
+  ---
+  duration_ms: 5.9641
+  type: 'test'
+  ...
+# Subtest: revocation persists across clients and requires explicit reactivation
+ok 38 - revocation persists across clients and requires explicit reactivation
+  ---
+  duration_ms: 9.4029
+  type: 'test'
+  ...
+# Subtest: concurrent authenticated requests share one anonymous registration
+ok 39 - concurrent authenticated requests share one anonymous registration
+  ---
+  duration_ms: 9.863
+  type: 'test'
+  ...
+# Subtest: device credentials are isolated by configured backend without changing ledger data
+ok 40 - device credentials are isolated by configured backend without changing ledger data
+  ---
+  duration_ms: 4.3179
+  type: 'test'
+  ...
+# Subtest: history excludes self, same-day, future, unlinked and invalid samples and is sorted by expense date
+ok 41 - history excludes self, same-day, future, unlinked and invalid samples and is sorted by expense date
+  ---
+  duration_ms: 14.503
+  type: 'test'
+  ...
+# Subtest: history recalculates median and five-sample threshold after edits and removals
+ok 42 - history recalculates median and five-sample threshold after edits and removals
+  ---
+  duration_ms: 2.1186
+  type: 'test'
+  ...
+# Subtest: analysis preserves safe-integer ledger totals and arbitrary category names
+ok 43 - analysis preserves safe-integer ledger totals and arbitrary category names
+  ---
+  duration_ms: 0.6666
+  type: 'test'
+  ...
+# Subtest: coverage boundaries require both periods, do not fill unknown days, zero baseline has no percent
+ok 44 - coverage boundaries require both periods, do not fill unknown days, zero baseline has no percent
+  ---
+  duration_ms: 0.9232
+  type: 'test'
+  ...
+# Subtest: calendar periods handle leap February, nonleap, year rollover, and exclude unmatched month tail explicitly
+ok 45 - calendar periods handle leap February, nonleap, year rollover, and exclude unmatched month tail explicitly
+  ---
+  duration_ms: 0.754
+  type: 'test'
+  ...
+# Subtest: mock excludes invalid prices, unmatched offers and invalid/duplicate merchant identities
+ok 46 - mock excludes invalid prices, unmatched offers and invalid/duplicate merchant identities
+  ---
+  duration_ms: 0.2903
+  type: 'test'
+  ...
+# Subtest: calendar math handles leap day and month/year crossover
+ok 47 - calendar math handles leap day and month/year crossover
+  ---
+  duration_ms: 2.2371
+  type: 'test'
+  ...
+# Subtest: median resists outliers, normalization trims cosmetic differences
+ok 48 - median resists outliers, normalization trims cosmetic differences
+  ---
+  duration_ms: 0.4917
+  type: 'test'
+  ...
+# Subtest: historical rating is blocked until five earlier linked records
+ok 49 - historical rating is blocked until five earlier linked records
+  ---
+  duration_ms: 13.95
+  type: 'test'
+  ...
+# Subtest: both periods require coverage >=90% for trend rating
+ok 50 - both periods require coverage >=90% for trend rating
+  ---
+  duration_ms: 0.8101
+  type: 'test'
+  ...
+# Subtest: month-to-date truncates the longer month to comparable number of calendar days
+ok 51 - month-to-date truncates the longer month to comparable number of calendar days
+  ---
+  duration_ms: 0.2563
+  type: 'test'
+  ...
+# Subtest: market mock stays simulated and deduplicates merchants
+ok 52 - market mock stays simulated and deduplicates merchants
+  ---
+  duration_ms: 0.2333
+  type: 'test'
+  ...
+# Subtest: date and money contracts reject calendar rollover, floats, negative and unsafe values
+ok 53 - date and money contracts reject calendar rollover, floats, negative and unsafe values
+  ---
+  duration_ms: 8.5779
+  type: 'test'
+  ...
+# Subtest: monthly totals use expenseDate and remain exact above JS safe sum
+ok 54 - monthly totals use expenseDate and remain exact above JS safe sum
+  ---
+  duration_ms: 0.4707
+  type: 'test'
+  ...
+# Subtest: IANA dates, midnight, DST, travel and relative month boundary
+ok 55 - IANA dates, midnight, DST, travel and relative month boundary
+  ---
+  duration_ms: 20.4668
+  type: 'test'
+  ...
+# Subtest: CSV escapes quotes, delimiters, line breaks and spreadsheet formula injection
+ok 56 - CSV escapes quotes, delimiters, line breaks and spreadsheet formula injection
+  ---
+  duration_ms: 0.4319
+  type: 'test'
+  ...
+# Subtest: demonstration parser fixed evaluation: multiple entries, yesterday, partial and invalid outputs
+ok 57 - demonstration parser fixed evaluation: multiple entries, yesterday, partial and invalid outputs
+  ---
+  duration_ms: 4.4029
+  type: 'test'
+  ...
+# Subtest: conservative reminders: no app, offline uncertainty, deletion, stale, cross day, zone change, policy pending
+ok 58 - conservative reminders: no app, offline uncertainty, deletion, stale, cross day, zone change, policy pending
+  ---
+  duration_ms: 1.4629
+  type: 'test'
+  ...
+# Subtest: architecture positive and negative fixtures really execute checker
+ok 59 - architecture positive and negative fixtures really execute checker
+  ---
+  duration_ms: 8.0717
+  type: 'test'
+  ...
+# Subtest: secret scanner rejects synthetic secret and private-key header; clean environment template passes
+ok 60 - secret scanner rejects synthetic secret and private-key header; clean environment template passes
+  ---
+  duration_ms: 0.181
+  type: 'test'
+  ...
+# Subtest: ESLint real restricted import negative fails; shared import positive passes
+ok 61 - ESLint real restricted import negative fails; shared import positive passes
+  ---
+  duration_ms: 147.0719
+  type: 'test'
+  ...
+# Subtest: actual Pages repository, user site, explicit custom-domain root and invalid bases
+ok 62 - actual Pages repository, user site, explicit custom-domain root and invalid bases
+  ---
+  duration_ms: 1.9587
+  type: 'test'
+  ...
+# Subtest: Pages disables API by default, permits explicit HTTPS backend and rejects secret-bearing or insecure URLs
+ok 63 - Pages disables API by default, permits explicit HTTPS backend and rejects secret-bearing or insecure URLs
+  ---
+  duration_ms: 2.7413
+  type: 'test'
+  ...
+# Subtest: disabled API never sends network requests; external API uses explicit prefix, omitted cookies and no redirect
+ok 64 - disabled API never sends network requests; external API uses explicit prefix, omitted cookies and no redirect
+  ---
+  duration_ms: 37.2814
+  type: 'test'
+  ...
+# Subtest: bad backend response, unavailable backend and connection timeout never simulate AI success
+ok 65 - bad backend response, unavailable backend and connection timeout never simulate AI success
+  ---
+  duration_ms: 6.5413
+  type: 'test'
+  ...
+# Subtest: real build fails closed on unknown VITE variables before a secret could enter assets
+ok 66 - real build fails closed on unknown VITE variables before a secret could enter assets
+  ---
+  duration_ms: 408.5589
+  type: 'test'
+  ...
+# Subtest: four requested lines produce deterministic editable candidates with exactly the approved seven categories
+ok 67 - four requested lines produce deterministic editable candidates with exactly the approved seven categories
+  ---
+  duration_ms: 4.2956
+  type: 'test'
+  ...
+# Subtest: conflicting and unknown keywords never choose a category including other automatically
+ok 68 - conflicting and unknown keywords never choose a category including other automatically
+  ---
+  duration_ms: 0.629
+  type: 'test'
+  ...
+# Subtest: rules are centrally extensible and do not use first-match priority
+ok 69 - rules are centrally extensible and do not use first-match priority
+  ---
+  duration_ms: 0.3153
+  type: 'test'
+  ...
+# Subtest: invalid or missing amounts remain visible candidates for manual repair
+ok 70 - invalid or missing amounts remain visible candidates for manual repair
+  ---
+  duration_ms: 1.143
+  type: 'test'
+  ...
+# Subtest: calendar dates, relative day boundaries and ambiguous dates require accurate review
+ok 71 - calendar dates, relative day boundaries and ambiguous dates require accurate review
+  ---
+  duration_ms: 0.5861
+  type: 'test'
+  ...
+# Subtest: blank lines preserve original line numbers and bounds never silently truncate data
+ok 72 - blank lines preserve original line numbers and bounds never silently truncate data
+  ---
+  duration_ms: 0.5614
+  type: 'test'
+  ...
+# Subtest: service worker ignores previous-day and invalid push; shows only current local-date payload
+ok 73 - service worker ignores previous-day and invalid push; shows only current local-date payload
+  ---
+  duration_ms: 63.8918
+  type: 'test'
+  ...
+# Subtest: subpath notification click never focuses another repository or returns to origin root
+ok 74 - subpath notification click never focuses another repository or returns to origin root
+  ---
+  duration_ms: 3.1476
+  type: 'test'
+  ...
+# Subtest: read-only PR CI passes and active deployment actions or permissions are rejected
+ok 75 - read-only PR CI passes and active deployment actions or permissions are rejected
+  ---
+  duration_ms: 2.7897
+  type: 'test'
+  ...
+# Subtest: release workflows require manual confirmation, main and a successful build
+ok 76 - release workflows require manual confirmation, main and a successful build
+  ---
+  duration_ms: 49.5613
+  type: 'test'
+  ...
+1..76
+# tests 76
+# suites 0
+# pass 76
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 728.8366

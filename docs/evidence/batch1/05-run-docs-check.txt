@@ -1,0 +1,5 @@
+
+> ai-bookkeeping-assistant@0.1.0 docs:check
+> node scripts/docs-check.mjs
+
+PASS: engineering documentation links, commands and no-deploy CI policy

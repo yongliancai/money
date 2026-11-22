@@ -1,0 +1,88 @@
+TAP version 13
+# Subtest: editing an old record onto today invalidates zero status and snapshots incomplete atomically
+ok 1 - editing an old record onto today invalidates zero status and snapshots incomplete atomically
+  ---
+  duration_ms: 27.5063
+  type: 'test'
+  ...
+# Subtest: import invalidates zero status and updates sync without creating completion activity
+ok 2 - import invalidates zero status and updates sync without creating completion activity
+  ---
+  duration_ms: 8.7713
+  type: 'test'
+  ...
+# Subtest: imported zero days never complete today after clock advance or timezone change
+ok 3 - imported zero days never complete today after clock advance or timezone change
+  ---
+  duration_ms: 6.2011
+  type: 'test'
+  ...
+# Subtest: renaming a linked item removes stale identity; amount/date edits keep explicit identity
+ok 4 - renaming a linked item removes stale identity; amount/date edits keep explicit identity
+  ---
+  duration_ms: 4.0493
+  type: 'test'
+  ...
+# Subtest: imported group identifier collision cannot silently join unrelated existing product
+ok 5 - imported group identifier collision cannot silently join unrelated existing product
+  ---
+  duration_ms: 4.2854
+  type: 'test'
+  ...
+# Subtest: ambiguous or orphan backup relationships fail validation before any write
+ok 6 - ambiguous or orphan backup relationships fail validation before any write
+  ---
+  duration_ms: 2.3555
+  type: 'test'
+  ...
+# Subtest: same-day concurrent zero confirmation versus expense insert never leaves a conflict
+ok 7 - same-day concurrent zero confirmation versus expense insert never leaves a conflict
+  ---
+  duration_ms: 3.0014
+  type: 'test'
+  ...
+# Subtest: import failure rolls back expenses, zero status, product links, revisions and outbox; token can retry
+ok 8 - import failure rolls back expenses, zero status, product links, revisions and outbox; token can retry
+  ---
+  duration_ms: 4.1311
+  type: 'test'
+  ...
+# Subtest: v1 upgrade retains real records and activity and permits CRUD and v1/v2 round trips
+ok 9 - v1 upgrade retains real records and activity and permits CRUD and v1/v2 round trips
+  ---
+  duration_ms: 3.8202
+  type: 'test'
+  ...
+# Subtest: backup and analysis snapshots cannot mix expenses and links across concurrent deletion
+ok 10 - backup and analysis snapshots cannot mix expenses and links across concurrent deletion
+  ---
+  duration_ms: 3.6684
+  type: 'test'
+  ...
+# Subtest: existing product groups never silently merge and failed linking does not partially change them
+ok 11 - existing product groups never silently merge and failed linking does not partially change them
+  ---
+  duration_ms: 5.8464
+  type: 'test'
+  ...
+# Subtest: an ID inserted by a second tab after import preview retains its local data and relationship
+ok 12 - an ID inserted by a second tab after import preview retains its local data and relationship
+  ---
+  duration_ms: 3.6123
+  type: 'test'
+  ...
+# Subtest: blocked v1 upgrade reports the other open tab and completes without discarding records
+ok 13 - blocked v1 upgrade reports the other open tab and completes without discarding records
+  ---
+  duration_ms: 0.9016
+  type: 'test'
+  ...
+1..13
+# tests 13
+# suites 0
+# pass 13
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 203.4845

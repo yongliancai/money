@@ -11,6 +11,7 @@ import {
 import { localDate } from '../../shared/dates.js';
 import { CATEGORIES } from './features/quick-entry/classification-rules.js';
 import { parseQuickEntry } from './features/quick-entry/parser.js';
+import { createAnalysisUI } from './features/analysis/analysis-ui.js';
 
 const $ = (id) => document.getElementById(id);
 const money = (n) => n.toLocaleString('zh-TW');
@@ -28,6 +29,7 @@ let deleteId = null;
 let config = null;
 let confirming = false;
 let quickDateEdited = false;
+let analysisUI;
 const pagesV1 = import.meta.env.MODE === 'pages';
 const api = createApi(
   pagesV1
@@ -240,6 +242,7 @@ async function render() {
     row.append(title, track);
     $('categories').append(row);
   }
+  if (analysisUI) await analysisUI.render();
 }
 function clearPreview() {
   if (pending?.token) ledger.cancel(pending.token);
@@ -337,7 +340,22 @@ function download(filename, text, type) {
 async function init() {
   $('backend-ai').hidden = pagesV1;
   $('backend-settings').hidden = pagesV1;
-  ledger = await openLedger();
+  ledger = await openLedger(undefined, undefined, () =>
+    message(
+      '帳本升級正在等待其他舊版分頁關閉；請關閉其他日日記分頁，資料不會被刪除。',
+      true,
+    ),
+  );
+  analysisUI = createAnalysisUI(
+    ledger,
+    () => {
+      message('消費分析資料已更新。');
+      void render().catch((error) => message(friendly(error), true));
+      void syncNow();
+    },
+    (text) => message(text, true),
+  );
+  analysisUI.mount();
   sync = createSync(ledger, api.fetch, {
     identityScope: api.apiBase === '/' ? '' : api.apiBase || 'disabled',
   });
@@ -364,6 +382,14 @@ async function init() {
       }
     });
   bind('add-manual', 'click', () => openExpense());
+  bind('today-zero-button', 'click', async () => {
+    if (!window.confirm('確認今天完全沒有消費嗎？若當天已有紀錄則無法確認。'))
+      return;
+    await ledger.confirmZeroSpend();
+    message('已確認今天沒有消費，記帳完成狀態已更新。');
+    await render();
+    void syncNow();
+  });
   bind('quick-date', 'input', () => {
     quickDateEdited = true;
   });
@@ -491,9 +517,17 @@ async function init() {
       pending = { ...preview, type: 'import' };
       $('preview-title').textContent = '預覽合併匯入';
       $('preview-note').textContent =
-        `新增 ${preview.added.length} 筆；跳過重複 ${preview.duplicates} 筆；恢復曾刪除 ${preview.restored.length} 筆。匯入不計入今日完成。`;
+        `新增 ${preview.added.length} 筆；跳過重複 ${preview.duplicates} 筆；恢復曾刪除 ${preview.restored.length} 筆。零支出 ${preview.zeroDays.length} 日、商品對應 ${preview.productLinkCount} 筆候選；衝突及既有資料將保留本機版本。匯入不計入今日完成。`;
       $('preview-rows').replaceChildren();
       const restored = new Set(preview.restored.map((r) => r.id));
+      for (const zero of preview.zeroDays)
+        $('preview-rows').append(
+          node(
+            'p',
+            `【零支出候選】${zero.date}（今天不匯入，有消費或既有確認時略過）`,
+            'import-row',
+          ),
+        );
       for (const record of preview.added)
         $('preview-rows').append(
           node(

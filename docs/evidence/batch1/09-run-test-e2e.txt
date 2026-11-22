@@ -1,0 +1,19 @@
+
+> ai-bookkeeping-assistant@0.1.0 test:e2e
+> playwright test
+
+[WebServer] (node:21160) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 6 tests using 1 worker
+
+(node:36528) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 [chromium] › tests\e2e\core.spec.js:21:1 › manual CRUD, monthly total and today completion regression (941ms)
+  ok 2 [chromium] › tests\e2e\core.spec.js:44:1 › AI preview cancellation, editable fields, double confirmation and no pre-confirm writes (657ms)
+  ok 3 [chromium] › tests\e2e\core.spec.js:64:1 › JSON backup, deletion, restore warning, cancellation, dedup and import exclusion (1.1s)
+  ok 4 [chromium] › tests\e2e\core.spec.js:91:1 › installed service worker serves shell after offline reload; local CRUD survives reconnect (752ms)
+  ok 5 [chromium] › tests\e2e\core.spec.js:115:3 › isolated network-error interception › mobile viewport, text injection safety, invalid import and AI network failure fallback (537ms)
+  ok 6 [chromium] › tests\e2e\core.spec.js:153:1 › desktop and mobile visual evidence, manifest and revocation recovery (961ms)
+
+  6 passed (6.1s)

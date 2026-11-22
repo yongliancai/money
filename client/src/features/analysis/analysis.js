@@ -6,7 +6,7 @@ export const dateAt = (date, offset) => {
   return d.toISOString().slice(0, 10);
 };
 export const normaliseItem = (name) =>
-  String(name || '').normalize('NFKC').toLowerCase().replace(/[\\s，,。、()（）·・_-]/g, '');
+  String(name || '').normalize('NFKC').toLowerCase().replace(/[\s，,。、()（）·・_-]/g, '');
 export function median(values) {
   if (!values.length) return null;
   const sorted = [...values].sort((a, b) => a - b);

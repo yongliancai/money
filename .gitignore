@@ -1,0 +1,12 @@
+node_modules/
+dist/
+dist-pages/
+.env*
+!.env.example
+data/
+*.sqlite*
+test-results/
+playwright-report/
+*.log
+.tmp/
+docs/evidence/new-session-run.txt

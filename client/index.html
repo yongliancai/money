@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#176556" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="description"
+      content="把生活記下來。離線可用、資料留在裝置的智慧記帳助手。"
+    />
+    <link rel="manifest" href="%BASE_URL%manifest.webmanifest" />
+    <link rel="icon" href="%BASE_URL%icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="%BASE_URL%icon-192.png" />
+    <title>日日記｜智慧記帳助手</title>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="%BASE_URL%" aria-label="日日記首頁"
+          ><img src="%BASE_URL%icon.svg" alt="" width="40" height="40" /><span
+            >日日記<small>你的生活，都有跡可循</small></span
+          ></a
+        >
+        <nav aria-label="主要選單">
+          <button
+            class="nav-button active"
+            data-view="overview"
+            aria-current="page"
+          >
+            ◫ <span>記帳總覽</span>
+          </button>
+          <button class="nav-button" data-view="backup">
+            ⇅ <span>資料備份</span>
+          </button>
+          <button class="nav-button" data-view="settings">
+            ◷ <span>提醒設定</span>
+          </button>
+        </nav>
+        <div class="privacy-note">
+          <span class="privacy-icon">▣</span><strong>帳本，留在你的裝置</strong>
+          <p>免登入，離線也能記。<br />記得定期匯出備份。</p>
+        </div>
+        <p class="environment">隔離開發版 · 未連接真實 AI</p>
+      </aside>
+      <main>
+        <header class="topbar">
+          <span id="today-label"></span
+          ><span id="connection" class="badge">本機帳本</span>
+        </header>
+        <div id="message" role="status" aria-live="polite" hidden></div>
+        <section id="overview" class="view">
+          <div class="page-heading">
+            <div>
+              <p class="eyebrow">每一筆，都是生活</p>
+              <h1>把日常，慢慢記下來。</h1>
+              <p>一點一滴，讓花費更清楚。</p>
+            </div>
+            <button class="primary" id="add-manual">＋ 手動記帳</button>
+          </div>
+          <div class="summary-grid">
+            <article class="total-card">
+              <div class="card-label">
+                <span>本月支出</span
+                ><label class="sr-only" for="month">統計月份</label
+                ><input id="month" type="month" />
+              </div>
+              <div class="total">
+                <small>NT$</small> <span id="month-total">0</span>
+              </div>
+              <div class="card-footer">
+                <span id="month-count">0 筆記錄</span
+                ><span>依消費日期計算</span>
+              </div>
+            </article>
+            <article class="completion-card">
+              <span class="circle-check" aria-hidden="true">✓</span>
+              <div>
+                <h2 id="completion-title">今天還沒記帳</h2>
+                <p id="completion-detail">記下第一筆，替今天留個紀錄。</p>
+              </div>
+              <span class="small-label">今日新建記帳才計入完成</span>
+            </article>
+          </div>
+          <article class="ai-card" aria-labelledby="quick-title">
+            <div class="section-heading">
+              <div>
+                <h2 id="quick-title">
+                  快速文字記帳 <span class="pill">裝置內規則解析</span>
+                </h2>
+                <p>
+                  每行一筆，例如「早餐蛋餅 45」。預覽後由你確認，離線也能使用。
+                </p>
+              </div>
+            </div>
+            <form id="quick-form">
+              <label for="quick-input">快速記帳文字</label>
+              <textarea
+                id="quick-input"
+                rows="4"
+                maxlength="4000"
+                placeholder="早餐蛋餅 45&#10;午餐便當 100&#10;捷運 30&#10;全聯買牛奶 65"
+                required
+              ></textarea>
+              <div class="quick-footer">
+                <label
+                  >預設消費日期<input
+                    id="quick-date"
+                    type="date"
+                    required /></label
+                ><button class="primary" type="submit">預覽快速記帳</button>
+              </div>
+              <p class="muted">
+                分類衝突或無法判定時，請在預覽自行選擇。本版不使用 AI API。
+              </p>
+            </form>
+          </article>
+          <article class="ai-card" id="backend-ai" hidden>
+            <div class="section-heading">
+              <div>
+                <h2>用一句話，記下花費 <span class="pill">解析預覽</span></h2>
+                <p>例如：昨天午餐 120、今天咖啡 55。每筆都由你確認。</p>
+              </div>
+              <span class="spark" aria-hidden="true">✦</span>
+            </div>
+            <form id="ai-form">
+              <label class="sr-only" for="ai-input">花費描述</label
+              ><textarea
+                id="ai-input"
+                rows="2"
+                maxlength="4000"
+                placeholder="今天花了什麼？"
+                required
+              ></textarea>
+              <div class="ai-footer">
+                <span id="ai-mode">AI 尚未設定，手動記帳隨時可用</span
+                ><button class="primary" type="submit" id="parse-button">
+                  解析並預覽
+                </button>
+              </div>
+            </form>
+          </article>
+          <div class="details-grid">
+            <section class="records-card">
+              <div class="section-heading">
+                <h2>記帳明細</h2>
+                <span id="records-count" class="muted"></span>
+              </div>
+              <div class="filters">
+                <label
+                  >搜尋品項<input
+                    type="search"
+                    id="search"
+                    placeholder="找一筆花費…" /></label
+                ><label
+                  >分類<select id="category-filter">
+                    <option value="">全部分類</option>
+                  </select></label
+                >
+              </div>
+              <div id="records"></div>
+            </section>
+            <section class="categories-card">
+              <h2>支出分布</h2>
+              <p class="muted">看看這個月的生活樣貌</p>
+              <div id="categories"></div>
+            </section>
+          </div>
+        </section>
+        <section id="backup" class="view" hidden>
+          <div class="page-heading">
+            <div>
+              <p class="eyebrow">資料自己保管</p>
+              <h1>為記憶，留一份備份。</h1>
+              <p>瀏覽器資料可能被清除，建議定期下載。</p>
+            </div>
+          </div>
+          <div class="panel">
+            <h2>匯出帳本</h2>
+            <p>
+              JSON 可用來還原；CSV
+              適合用試算表查看。檔案包含消費明細，請妥善保存。
+            </p>
+            <div class="button-row">
+              <button class="primary" id="export-json">下載 JSON 備份</button
+              ><button class="secondary" id="export-csv">下載 CSV</button>
+            </div>
+          </div>
+          <div class="panel">
+            <h2>合併匯入 JSON</h2>
+            <p>
+              先預覽，再確認。同 ID
+              的現有紀錄會保留，匯入不計入今日完成。舊備份可能恢復曾刪除的紀錄。
+            </p>
+            <label class="file-label" for="import-file"
+              >選擇備份檔案<input
+                id="import-file"
+                type="file"
+                accept=".json,application/json"
+            /></label>
+          </div>
+        </section>
+        <section id="settings" class="view" hidden>
+          <div id="local-settings" class="panel">
+            <h1>當日提示與安裝</h1>
+            <h2 id="settings-completion-title">今天還沒記帳</h2>
+            <p>
+              開啟網站時會依本機紀錄顯示今日是否完成記帳。今日新建記帳才計入完成，匯入備份不算新增。
+            </p>
+            <p class="notice">
+              第一版不提供關閉網站後的背景定時提醒，不會要求通知權限。
+            </p>
+            <h2>加入 iPhone 主畫面</h2>
+            <p>
+              使用 Safari
+              開啟網站，點選分享選單「加入主畫面」，再由主畫面開啟。首次連線完成快取後，基本記帳可離線使用。
+            </p>
+            <p>
+              帳本保存在目前瀏覽器，請定期從「資料備份」下載
+              JSON。換裝置或網址時，可預覽合併匯入備份。
+            </p>
+          </div>
+          <div id="backend-settings" hidden>
+            <div class="page-heading">
+              <div>
+                <p class="eyebrow">溫柔提醒，慢慢養成</p>
+                <h1>給自己的小提醒。</h1>
+                <p>狀態不確定時，系統會優先略過提醒。</p>
+              </div>
+            </div>
+            <div class="panel">
+              <form id="settings-form">
+                <h2>記帳提醒</h2>
+                <label class="toggle-label"
+                  ><input
+                    id="reminder-enabled"
+                    type="checkbox"
+                  />開啟每日記帳提醒</label
+                >
+                <div class="form-grid">
+                  <label
+                    >提醒時間<input
+                      id="reminder-time"
+                      type="time"
+                      required /></label
+                  ><label
+                    >裝置時區<input
+                      id="reminder-zone"
+                      type="text"
+                      required
+                      placeholder="Asia/Taipei"
+                  /></label>
+                </div>
+                <button class="primary" type="submit">儲存提醒設定</button>
+              </form>
+              <p class="notice">
+                提醒有效期與補發延遲待定，正式提醒目前暫停。整天未開啟 App
+                或離線記帳尚未同步時，可能漏提醒。推播無法保證送達。
+              </p>
+              <div class="button-row">
+                <button class="secondary" id="subscribe-push">
+                  允許並訂閱通知</button
+                ><button class="text-button" id="unsubscribe-push">
+                  取消通知訂閱
+                </button>
+              </div>
+              <p id="push-status" class="muted"></p>
+            </div>
+            <div class="panel">
+              <h2>離線與同步</h2>
+              <p id="sync-status">帳本儲存在本機；同步僅包含提醒狀態。</p>
+              <button class="secondary" id="sync-now">立即同步狀態</button>
+              <p class="muted">
+                iPhone：使用 Safari
+                分享選單「加入主畫面」，再從主畫面開啟以設定通知。
+              </p>
+              <button class="text-button danger" id="revoke-device">
+                撤銷此裝置的伺服器授權
+              </button>
+              <button class="secondary" id="reactivate-device" hidden>
+                重新啟用匿名同步
+              </button>
+            </div>
+          </div>
+        </section>
+        <footer>日日記 · 把生活過成自己喜歡的樣子</footer>
+      </main>
+    </div>
+    <dialog id="expense-dialog">
+      <form id="expense-form">
+        <div class="dialog-heading">
+          <h2 id="expense-dialog-title">新增記帳</h2>
+          <button
+            type="button"
+            class="icon-button"
+            id="close-expense"
+            aria-label="關閉記帳視窗"
+          >
+            ×
+          </button>
+        </div>
+        <label>品項<input id="item" maxlength="100" required /></label>
+        <div class="form-grid">
+          <label
+            >金額（TWD）<input
+              id="amount"
+              type="number"
+              min="1"
+              step="1"
+              max="9007199254740991"
+              required /></label
+          ><label
+            >消費日期<input id="expense-date" type="date" required
+          /></label>
+        </div>
+        <label
+          >分類<input
+            id="category"
+            list="category-options"
+            maxlength="40"
+            required
+            value="其他" /></label
+        ><datalist id="category-options">
+          <option value="餐飲"></option>
+          <option value="交通"></option>
+          <option value="購物"></option>
+          <option value="娛樂"></option>
+          <option value="學習"></option>
+          <option value="生活"></option>
+          <option value="其他"></option>
+        </datalist>
+        <p class="muted">分類可自行輸入；歷史紀錄編輯不會計入今日完成。</p>
+        <button class="primary full" type="submit">確認儲存</button>
+      </form>
+    </dialog>
+    <dialog id="preview-dialog">
+      <div class="dialog-heading">
+        <h2 id="preview-title">確認解析結果</h2>
+        <button class="icon-button" id="close-preview" aria-label="取消預覽">
+          ×
+        </button>
+      </div>
+      <p id="preview-note"></p>
+      <form id="preview-form">
+        <div id="preview-rows"></div>
+        <div class="button-row">
+          <button type="button" class="secondary" id="cancel-preview">
+            取消</button
+          ><button class="primary" type="submit" id="confirm-preview">
+            確認儲存這些紀錄
+          </button>
+        </div>
+      </form>
+    </dialog>
+    <dialog id="delete-dialog">
+      <h2>刪除這筆紀錄？</h2>
+      <p id="delete-label"></p>
+      <p>刪除後可透過先前匯出的 JSON 備份合併還原。</p>
+      <div class="button-row">
+        <button class="secondary" id="cancel-delete">保留紀錄</button
+        ><button class="primary danger-bg" id="confirm-delete">確認刪除</button>
+      </div>
+    </dialog>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

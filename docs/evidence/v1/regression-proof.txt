@@ -1,0 +1,2 @@
+EXPECTED FAIL (red), exit 1: createdAt-based monthly total fails the assertion
+PASS (green), exit 0: expenseDate-based implementation passes the same assertion

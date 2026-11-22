@@ -1,0 +1,22 @@
+Observed failure excerpts retained from actual execution (2026-11-22 Asia/Taipei).
+
+1. Initial npm test: 23 passed / 1 failed.
+   AI preview test compared unsorted UUID-keyed outbox.at(-1) to the latest event.
+   AssertionError: false !== true.
+   Fixed test selection by sorting revision; the completion assertions remain.
+
+2. Initial npm run lint: exit 1.
+   vite.config.js: no-useless-escape in the precache asset regex.
+   Removed unnecessary escape; lint and build pass.
+
+3. New browser acceptance case: 5 passed / 1 failed.
+   desktop and mobile visual evidence, manifest and revocation recovery:
+   expect(getByRole('button', { name: '重新啟用匿名同步' })).toBeVisible() timed out.
+   Test reloaded immediately after clicking the asynchronous revoke action.
+   Now waits for the visible success acknowledgement before reload.
+   Persisted-state assertion remains; targeted and complete E2E pass.
+
+4. First recorded verify: exit 1 (guardrails).
+   scripts/record-verification.mjs: 動態 require 不允許
+   Replaced dynamic require with readFileSync + JSON.parse; rule unchanged.
+   Full output: initial-guardrail-failure.txt.

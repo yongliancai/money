@@ -1,0 +1,2 @@
+PASS: HTML, manifest, icons and service worker share /money/
+exitCode=0

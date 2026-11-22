@@ -1,0 +1,44 @@
+{
+  "recordedAt": "2026-11-22T01:55:31.553Z",
+  "platform": "win32",
+  "node": "v22.23.1",
+  "npm": "10.9.8",
+  "results": [
+    {
+      "name": "clean-install",
+      "command": "npm ci",
+      "startedAt": "2026-11-22T01:55:31.553Z",
+      "durationMs": 5047,
+      "exitCode": 0,
+      "status": "PASS",
+      "log": "docs/evidence/v1/clean-install.txt"
+    },
+    {
+      "name": "quality-and-e2e",
+      "command": "npm run verify",
+      "startedAt": "2026-11-22T01:55:36.600Z",
+      "durationMs": 32670,
+      "exitCode": 0,
+      "status": "PASS",
+      "log": "docs/evidence/v1/quality-and-e2e.txt"
+    },
+    {
+      "name": "regression-proof",
+      "command": "node scripts/regression-proof.mjs",
+      "startedAt": "2026-11-22T01:56:09.270Z",
+      "durationMs": 178,
+      "exitCode": 0,
+      "status": "PASS",
+      "log": "docs/evidence/v1/regression-proof.txt"
+    },
+    {
+      "name": "dependency-audit",
+      "command": "npm audit --audit-level=high",
+      "startedAt": "2026-11-22T01:56:09.449Z",
+      "durationMs": 590,
+      "exitCode": 0,
+      "status": "PASS",
+      "log": "docs/evidence/v1/dependency-audit.txt"
+    }
+  ]
+}

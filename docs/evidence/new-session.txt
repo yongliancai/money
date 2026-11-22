@@ -1,0 +1,21 @@
+The session supplied project instructions labeled [`AGENTS.md`](C:/Users/w5555/money/AGENTS.md). I did not manually open that file. Its contents are present in the conversation, but I cannot independently certify filesystem auto-discovery from that alone.
+
+From those supplied instructions:
+
+- **Canonical engineering policy:** [`docs/PROJECT-ENGINEERING.md`](C:/Users/w5555/money/docs/PROJECT-ENGINEERING.md).
+- **Required initial reading:** that policy, `docs/REQUIREMENTS.md`, `docs/ARCHITECTURE.md`, and `docs/DECISIONS/README.md`.
+- **Final verification:** `npm run verify`.
+- **Positive/negative regression evidence:** `node scripts/regression-proof.mjs`.
+- **Dependency boundaries:** client must not import server, Node APIs, or model SDKs; shared must not import either application layer.
+- **Separate approval required:** production deployment, production data operations, resources incurring costs, privilege expansion, transmitting keys, and merging protected branches.
+- **Additional limits:** isolated development only; no automatic deployment workflow or weakening effective quality gates. Unconfirmed AI previews must not be saved; imports must not create today’s completed activities.
+
+Actual execution evidence:
+
+| Check | Result | Evidence |
+|---|---|---|
+| Manually read required guidance | **BLOCKED** | Local execution failed: `registered Core launch requires an installed app`. The alternate local Node runtime exited unexpectedly, including on retry. No file contents were returned. |
+| Existing positive guardrail fixtures | **BLOCKED** | Could not inspect or launch the existing tests. |
+| Existing negative guardrail fixtures | **BLOCKED** | Same local runtime failure. |
+
+No fixture tests executed, so there is no actual PASS or FAIL evidence. I did not run the broader verification suite, modify files, weaken tests, use external services, or inspect environment files, credentials, personal data, other projects, or model providers.

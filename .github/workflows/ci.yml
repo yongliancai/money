@@ -1,0 +1,35 @@
+name: Quality checks (no deployment)
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.23.1'
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium webkit
+      - run: npm run verify
+      - run: node scripts/regression-proof.mjs
+      - run: npm audit --audit-level=high
+      - name: Build actual repository Pages artifact without publishing
+        run: npm run build:pages
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pages-preview-not-deployed
+          path: dist-pages
+          include-hidden-files: true
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: browser-evidence
+          path: |
+            test-results/
+            playwright-report/

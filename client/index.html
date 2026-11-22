@@ -31,8 +31,10 @@
             data-view="overview"
             aria-current="page"
           >
-            ◫ <span>記帳總覽</span>
+            ◫ <span>快速記帳</span>
           </button>
+          <button class="nav-button" data-view="history">▤ <span>消費紀錄</span></button>
+          <button class="nav-button" data-view="analysis">▥ <span>消費分析</span></button>
           <button class="nav-button" data-view="backup">
             ⇅ <span>資料備份</span>
           </button>
@@ -143,6 +145,13 @@
               </div>
             </form>
           </article>
+          <div class="analysis-zero-shortcut">
+            <button type="button" class="secondary" id="today-zero-button">今天沒有消費</button>
+            <p class="muted">今天沒有任何支出時，可確認零支出並計入今日完成狀態。</p>
+          </div>
+        </section>
+        <section id="history" class="view" hidden>
+          <div class="page-heading"><div><p class="eyebrow">每一筆，都是生活</p><h1>消費紀錄</h1><p>查詢及修改過去的記帳資料。</p></div></div>
           <div class="details-grid">
             <section class="records-card">
               <div class="section-heading">
@@ -169,6 +178,43 @@
               <div id="categories"></div>
             </section>
           </div>
+        </section>
+        <section id="analysis" class="view" hidden>
+          <div class="page-heading"><div><p class="eyebrow">不靠猜測，認識自己的消費</p><h1>消費分析</h1><p>所有個人統計都只使用本機帳本；示範市場報價不代表真實搜尋結果。</p></div></div>
+          <article class="panel">
+            <h2>期間與分類消費趨勢</h2>
+            <label>比較期間
+              <select id="analysis-period-mode">
+                <option value="week">最近 7 天 vs. 前 7 天</option>
+                <option value="month">本月同期 vs. 上月同期</option>
+              </select>
+            </label>
+            <div id="analysis-period-summary" aria-live="polite"></div>
+            <h3>分類支出比較</h3><div id="analysis-categories"></div>
+            <p class="muted">資料完整度僅表示已記錄支出或已確認零支出的日期比例，不保證每一筆消費都已記錄。</p>
+          </article>
+          <article class="panel">
+            <h2>確認零支出日期</h2>
+            <p class="muted">記帳空白不等於沒有花費；請僅確認你確實沒有消費的日期。</p>
+            <label>日期<input id="analysis-zero-date" type="date" /></label>
+            <div class="button-row"><button id="analysis-confirm-zero" class="secondary" type="button">確認該日零支出</button><button id="analysis-cancel-zero" class="text-button" type="button">取消零支出確認</button></div>
+            <p id="analysis-zero-list" class="muted"></p>
+          </article>
+          <article class="panel">
+            <h2>同商品歷史交易比較</h2>
+            <p class="muted">請人工確認是相同商品、數量及規格後再建立對應；至少 5 筆較早的有效歷史紀錄才會顯示評級。</p>
+            <label>本次消費<select id="analysis-product-current"></select></label>
+            <label>另一筆已確認相同的歷史消費<select id="analysis-product-previous"></select></label>
+            <div class="button-row"><button class="secondary" id="analysis-confirm-match" type="button">確認兩筆為同商品</button><button class="text-button" id="analysis-unlink" type="button">解除本次商品對應</button></div>
+            <div id="analysis-history-result" aria-live="polite"></div>
+          </article>
+          <article class="panel">
+            <h2>市場自動比價（僅模擬）</h2>
+            <p class="notice">這一批只使用固定示範商家與測試價格，沒有 Google 搜尋、付費 API 或真實市場報價。</p>
+            <label>選擇消費紀錄<select id="analysis-market-product"></select></label>
+            <button class="secondary" id="analysis-market-run" type="button">執行模擬市場比價</button>
+            <div id="analysis-market-result" aria-live="polite"></div>
+          </article>
         </section>
         <section id="backup" class="view" hidden>
           <div class="page-heading">
@@ -208,7 +254,7 @@
             <h1>當日提示與安裝</h1>
             <h2 id="settings-completion-title">今天還沒記帳</h2>
             <p>
-              開啟網站時會依本機紀錄顯示今日是否完成記帳。今日新建記帳才計入完成，匯入備份不算新增。
+              開啟網站時會依本機紀錄顯示今日是否完成記帳。今日新建記帳或明確確認今天零支出都算完成；匯入備份不算新增。
             </p>
             <p class="notice">
               第一版不提供關閉網站後的背景定時提醒，不會要求通知權限。

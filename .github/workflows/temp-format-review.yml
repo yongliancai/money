@@ -1,0 +1,40 @@
+name: Temporary formatting and validation (read only)
+on:
+  push:
+    branches:
+      - feature/consumption-analysis-batch1
+permissions:
+  contents: read
+jobs:
+  format-preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.23.1'
+          cache: npm
+      - run: npm ci
+      - name: Format branch files in temporary checkout (no commit or push)
+        run: |
+          npx prettier --write client/index.html client/src/features/analysis/analysis-ui.js client/src/features/analysis/analysis.js client/src/main.js client/src/storage/ledger.js client/src/ui.css docs/ANALYSIS-BATCH1.md shared/schemas/index.js tests/integration/analysis-ledger.test.js tests/unit/analysis.test.js
+      - name: Emit formatted source in read-only logs for review
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from urllib.parse import quote
+          files = ['client/index.html', 'client/src/features/analysis/analysis-ui.js', 'client/src/features/analysis/analysis.js', 'client/src/main.js', 'client/src/storage/ledger.js', 'client/src/ui.css', 'docs/ANALYSIS-BATCH1.md', 'shared/schemas/index.js', 'tests/integration/analysis-ledger.test.js', 'tests/unit/analysis.test.js']
+          for path in files:
+              value = quote(Path(path).read_text(), safe='')
+              for pos in range(0, len(value), 1200):
+                  print('FMTCHUNK|' + path + '|' + str(pos) + '|' + value[pos:pos + 1200])
+          PY
+      - name: Validate code after ephemeral formatting (not a deployment)
+        run: |
+          npm run lint
+          npm run guardrails
+          npm run docs:check
+          npm test
+          npm run build
+          npm run build:pages

@@ -29,6 +29,7 @@ test('conflicts, unknown categories and missing amounts require editable review 
     .fill('自行確認的支出');
   await page.getByRole('button', { name: '確認儲存這些紀錄' }).click();
   await expect(page.locator('#month-total')).toHaveText('185');
+  await page.getByRole('button', { name: '消費紀錄' }).click();
   await expect(page.locator('#records .record')).toHaveCount(3);
 });
 
@@ -53,7 +54,9 @@ test('offline quick entry confirms exactly once, survives reload and reports tod
     );
   });
   await expect(page.locator('#month-total')).toHaveText('75');
+  await page.getByRole('button', { name: '消費紀錄' }).click();
   await expect(page.locator('#records .record')).toHaveCount(2);
+  await page.getByRole('button', { name: '快速記帳' }).click();
   await expect(page.locator('#completion-title')).toHaveText('今天已完成記帳');
   await page.reload();
   await expect(page.locator('#month-total')).toHaveText('75');
@@ -66,7 +69,7 @@ test('offline quick entry confirms exactly once, survives reload and reports tod
   );
   await expect(page.locator('#backend-ai')).toBeHidden();
   await expect(page.locator('#backend-settings')).toBeHidden();
-  await page.getByRole('button', { name: '記帳總覽' }).click();
+  await page.getByRole('button', { name: '快速記帳' }).click();
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= innerWidth,
@@ -103,6 +106,7 @@ test('local quick entry parses four examples without writing before explicit con
   await page.getByRole('button', { name: '預覽快速記帳' }).click();
   await page.getByRole('button', { name: '確認儲存這些紀錄' }).click();
   await expect(page.locator('#month-total')).toHaveText('240');
+  await page.getByRole('button', { name: '消費紀錄' }).click();
   await expect(page.locator('#records .record')).toHaveCount(4);
   expect(requests).toEqual([]);
 });

@@ -1,6 +1,6 @@
 import {
   sevenDayComparison, monthToDateComparison, historicalComparison,
-  normaliseItem, MOCK_OFFERS, validateMockOffers,
+  MOCK_OFFERS, validateMockOffers,
 } from './analysis.js';
 import { localDate } from '../../../../shared/dates.js';
 

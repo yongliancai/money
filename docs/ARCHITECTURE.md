@@ -1,6 +1,6 @@
 # 架構與資料契約
 
-## 第一批分析增量（未發布）
+## 第一批分析增量（已發布，詳見 RELEASE）
 
 IndexedDB 同名 `bookkeeping-v1` 升至 version 2，保留所有 v1 stores 與 expense schemaVersion=1，新增 dailyStatus、productLinks。開啟舊分頁阻擋升版時顯示提示，不刪除重建。`analysisSnapshot` 在單一 readonly transaction 讀取帳本、零支出、商品關係與時區，供分析與 JSON v2 匯出；JSON v1 仍可匯入。
 

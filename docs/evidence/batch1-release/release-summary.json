@@ -1,0 +1,51 @@
+{
+  "publishedAt": "2026-11-22T14:11:20Z",
+  "repository": "yongliancai/money",
+  "pullRequest": 3,
+  "acceptedHead": "1f1591d255ead79586917822172568e03ac9ae84",
+  "mergeAndDeployedCommit": "7551d96d879fa11dcefe433b039e91081310f838",
+  "tree": "201a17d982b63a6a4ab6d0e89c423787d7ffb289",
+  "workflow": {
+    "id": 45031237703,
+    "url": "https://github.com/yongliancai/money/actions/runs/45031237703",
+    "event": "workflow_dispatch",
+    "branch": "main",
+    "status": "completed",
+    "conclusion": "success"
+  },
+  "artifact": [
+    {
+      "id": 14757572455,
+      "name": "github-pages",
+      "digest": "sha256:ed10d81d51192f67e97f5e5cba45395f6972dd117ddd37b66610ed31af2aed3e"
+    }
+  ],
+  "url": "https://yongliancai.github.io/money/",
+  "acceptance": {
+    "command": "npx playwright test --config playwright.published.config.js",
+    "passed": 14,
+    "failed": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "browsers": [
+      "Chromium",
+      "desktop WebKit"
+    ],
+    "widths": [
+      320,
+      390,
+      768
+    ],
+    "syntheticDataOnly": true,
+    "persistentProfileUsed": false,
+    "userLedgerModified": false,
+    "indexedDBOrSiteDataCleared": false,
+    "apiRequests": 0,
+    "javascriptErrors": 0,
+    "httpErrors": 0
+  },
+  "iphonePhysical": "BLOCKED",
+  "newPaidServices": false,
+  "paidAPIRequests": 0,
+  "billing": "GitHub account bill was not inspected."
+}

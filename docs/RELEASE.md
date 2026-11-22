@@ -1,4 +1,39 @@
-# 第一版正式發布紀錄
+# 正式發布紀錄
+
+## 第一批消費分析（2026-11-22）
+
+使用者獨立批准本次第一批正式發布，包含 PR #3 Ready／依規則合併、既有手動 Pages workflow 與隔離合成資料驗收；不包含第二批、付費服務、權限擴張、其他 Repository 或真實帳本操作。
+
+**PASS：正式發布與公開網址驗收成功。**
+
+- PR #3 head 核對為 `1f1591d255ead79586917822172568e03ac9ae84`，base 核對為 `a6f45df`，CI 成功且 mergeable_state=clean。先標示 Ready，再以預期 head 防護合併，沒有 force push。
+- merge／正式程式版本：`7551d96d879fa11dcefe433b039e91081310f838`；tree `201a17d982b63a6a4ab6d0e89c423787d7ffb289` 與已驗收版本完全相同。
+- [手動發布 run 45031237703](https://github.com/yongliancai/money/actions/runs/45031237703)，event=workflow_dispatch、branch=main、確認文字 `PUBLISH money`，build／deploy 均成功。build 重新執行乾淨安裝、80 個程式測試、6 個原有 E2E、26 個 Pages E2E 與靜態建置。
+- artifact `github-pages` ID `14757572455`，digest `sha256:ed10d81d51192f67e97f5e5cba45395f6972dd117ddd37b66610ed31af2aed3e`。
+- 正式網址：https://yongliancai.github.io/money/ 。既有 Pages 存取設定與手動流程未變更，沒有改成 push／PR 自動部署。
+
+正式站驗收：`npx playwright test --config playwright.published.config.js`，Chromium 7 案、WebKit 7 案，**14 通過、0 失敗／跳過／flaky**。原始結果見 [published-results.json](evidence/batch1-release/published-results.json) 及 [執行日誌](evidence/batch1-release/published-run.txt)。此 config 是人工選用的正式站驗收，不會由一般 CI 自動操作正式網站。
+
+| 正式站檢查                                                                          | 結果                                      |
+| ----------------------------------------------------------------------------------- | ----------------------------------------- |
+| 快速文字預覽確認、CRUD、搜尋、JSON v2 匯出／刪除後還原／去重                        | PASS                                      |
+| 同商品人工確認與取消、五筆門檻／中位數、編輯及刪除重算                              | PASS                                      |
+| 最近 7 天日期／總額／百分比、月同期日期／筆數、18/20=90%、14/20=70%、13/20=65% 門檻 | PASS                                      |
+| 今天零支出確認與取消、匯入不完成今天                                                | PASS                                      |
+| 市場 Mock 明確示範標示、三商家與中位數、沒有真實市場請求                            | PASS                                      |
+| 重新載入保留資料、Worker scope／Manifest／圖示、離線重載及新增                      | PASS                                      |
+| 真實瀏覽器 context 內種入 v1 合成紀錄，正式程式升 v2 且完整保留                     | PASS                                      |
+| 320／390／768 寬度無水平溢出或主選單按鈕重疊                                        | PASS                                      |
+| JavaScript／HTTP 錯誤與非預期網路／API 請求                                         | 全部 0                                    |
+| 真正 iPhone Safari／主畫面安裝                                                      | BLOCKED：沒有實機，不能以桌面 WebKit 代替 |
+
+資料保護：每案由 Playwright 建立全新臨時 browser context，不使用 persistent context、Chrome 使用者 profile 或帳本；未呼叫 deleteDatabase／清除網站資料。刪除與還原只作用於該隔離 context 的合成資料。未提交測試帳本資料庫、備份下載、機密或本機環境檔；保留的是測試程式、匿名合成結果與畫面證據。
+
+本次產品程式沒有新增修復，發布前後驗收一次通過。GitHub 仍顯示既有 v4 actions 的 Node runtime 淘汰警告，工作成功且未隱藏；可於日後獨立維護。沒有購買服務、建立付費資源或發送付費 API 請求，GitHub 帳單未另行查核。
+
+本次後續紀錄提交只更新文件與獨立驗收工具／證據，不重發網站；正式站仍對應上述 `7551d96`。後續正式發布仍需使用者獨立批准。
+
+## 第一版（歷史發布）
 
 使用者於 2026-11-22 明確指示：「我給你權限你直接正式發佈，也可以操作我的電腦」。範圍為 yongliancai/money 第一版：合併已通過驗證的 PR、啟用 Pages、手動發布至 https://yongliancai.github.io/money/。沒有批准付費資源、秘密傳輸、真實帳本操作或後續自動發布。
 

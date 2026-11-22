@@ -11,6 +11,7 @@ import {
 import { localDate } from '../../shared/dates.js';
 import { CATEGORIES } from './features/quick-entry/classification-rules.js';
 import { parseQuickEntry } from './features/quick-entry/parser.js';
+import { createAnalysisUI } from './features/analysis/analysis-ui.js';
 
 const $ = (id) => document.getElementById(id);
 const money = (n) => n.toLocaleString('zh-TW');
@@ -28,6 +29,7 @@ let deleteId = null;
 let config = null;
 let confirming = false;
 let quickDateEdited = false;
+let analysisUI;
 const pagesV1 = import.meta.env.MODE === 'pages';
 const api = createApi(
   pagesV1
@@ -240,6 +242,7 @@ async function render() {
     row.append(title, track);
     $('categories').append(row);
   }
+  if (analysisUI) await analysisUI.render();
 }
 function clearPreview() {
   if (pending?.token) ledger.cancel(pending.token);
@@ -338,6 +341,12 @@ async function init() {
   $('backend-ai').hidden = pagesV1;
   $('backend-settings').hidden = pagesV1;
   ledger = await openLedger();
+  analysisUI = createAnalysisUI(
+    ledger,
+    () => { message('消費分析資料已更新。'); void render(); void syncNow(); },
+    (text) => message(text, true),
+  );
+  analysisUI.mount();
   sync = createSync(ledger, api.fetch, {
     identityScope: api.apiBase === '/' ? '' : api.apiBase || 'disabled',
   });
@@ -364,6 +373,13 @@ async function init() {
       }
     });
   bind('add-manual', 'click', () => openExpense());
+  bind('today-zero-button', 'click', async () => {
+    if (!window.confirm('確認今天完全沒有消費嗎？若當天已有紀錄則無法確認。')) return;
+    await ledger.confirmZeroSpend();
+    message('已確認今天沒有消費，記帳完成狀態已更新。');
+    await render();
+    void syncNow();
+  });
   bind('quick-date', 'input', () => {
     quickDateEdited = true;
   });

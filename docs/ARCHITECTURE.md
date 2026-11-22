@@ -1,5 +1,13 @@
 # 架構與資料契約
 
+## 第一批分析增量（未發布）
+
+IndexedDB 同名 `bookkeeping-v1` 升至 version 2，保留所有 v1 stores 與 expense schemaVersion=1，新增 dailyStatus、productLinks。開啟舊分頁阻擋升版時顯示提示，不刪除重建。`analysisSnapshot` 在單一 readonly transaction 讀取帳本、零支出、商品關係與時區，供分析與 JSON v2 匯出；JSON v1 仍可匯入。
+
+dailyStatus 的本機人工確認記 `origin:manual` 與 confirmedAt；匯入記 `origin:import`、confirmedAt:null，不論日期／時區變化都不能成為本機今日完成資格。新增、編輯、匯入支出與同日零支出失效、activity、revision/outbox 快照皆在同一 readwrite transaction。更新不變更 createdAt。提醒事件 schema 不增加欄位。
+
+productLinks 是 expenseId → 明確確認的商品群組 UUID；沒有名稱自動匹配。改品項解除該筆關係，改金額／日期保留關係並重算。不同群組不可直接合併；匯入群組若撞到本機 UUID，為新匯入成員重新配置群組，不改本機關係。完整期間、排序與備份規則見 [本批需求](ANALYSIS-BATCH1.md)。下方 v1 描述為已發布版本基線。
+
 第一版 Pages 最新資料流：快速文字表單 → `features/quick-entry/parser.js` → 集中 `classification-rules.js` → 可編輯預覽（未知分類空值）→ 使用者確認 → ledger.preview／confirm → IndexedDB。解析器不持有 storage 或網路權限。確認以 origin=manual 表示人工確認的本機輸入，維持既有備份 schema／資料庫版本。Pages runtime 強制不連後端，隱藏後端 AI／訂閱控制，只顯示本機今日完成與安裝說明；根目錄與 integration mode 的既有後端流程保留作回歸，不是第一版發布功能。
 
 GitHub Pages 補充：`config/site.json` 指向 `yongliancai/money`，`shared/site-config.js` 統一 base 與公開 API URL 規則；Vite pages mode 產出 `dist-pages` 並重寫 Manifest／Worker。未設定獨立後端時不發送 API 請求。`client/src/services/api.js` 負責指定後端、逾時、停用與契約驗證；裝置憑證依後端 URL 分隔。後端只對明確 `APP_ORIGIN` 回 CORS；Pages origin 為 `https://yongliancai.github.io`。詳見 [Pages 交接](GITHUB-PAGES.md)。

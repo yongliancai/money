@@ -39,12 +39,6 @@
           <button class="nav-button" data-view="analysis">
             ▥ <span>消費分析</span>
           </button>
-          <button class="nav-button" data-view="backup">
-            ⇅ <span>資料備份</span>
-          </button>
-          <button class="nav-button" data-view="settings">
-            ◷ <span>提醒設定</span>
-          </button>
         </nav>
         <div class="privacy-note">
           <span class="privacy-icon">▣</span><strong>帳本，留在你的裝置</strong>
@@ -57,6 +51,10 @@
           <span id="today-label"></span
           ><span id="connection" class="badge">本機帳本</span>
         </header>
+        <nav class="utility-nav" aria-label="帳本工具">
+          <button class="text-button" data-view="backup">⇅ 資料備份</button>
+          <button class="text-button" data-view="settings">◷ 提醒設定</button>
+        </nav>
         <div id="message" role="status" aria-live="polite" hidden></div>
         <section id="overview" class="view">
           <div class="page-heading">
@@ -88,7 +86,7 @@
                 <h2 id="completion-title">今天還沒記帳</h2>
                 <p id="completion-detail">記下第一筆，替今天留個紀錄。</p>
               </div>
-              <span class="small-label">今日新建記帳才計入完成</span>
+              <span class="small-label">今日新建記帳或確認零支出計入完成</span>
             </article>
           </div>
           <article class="ai-card" aria-labelledby="quick-title">
@@ -247,6 +245,9 @@
             <p class="muted">
               請人工確認是相同商品、數量及規格後再建立對應；至少 5
               筆較早的有效歷史紀錄才會顯示評級。
+            </p>
+            <p class="muted">
+              同一天沒有實際購買時間可排序，因此同日紀錄不互相比較；補記依消費日期判斷先後。已有不同商品群組時不自動合併，請先解除錯誤對應。修改品項後需重新確認商品關係。
             </p>
             <label
               >本次消費<select id="analysis-product-current"></select

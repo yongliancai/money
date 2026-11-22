@@ -1,5 +1,7 @@
 # 測試與驗收
 
+第一批新增 `analysis-regression.test.js`（unit／integration）與 `analysis-regression.spec.js`（Pages Chromium／WebKit）：實際帶資料 v1 升級、createdAt、交易回滾與重試、跨分頁競爭、匯入來源／群組碰撞、日期與金額邊界、五筆門檻與刪改重算、鍵盤操作、三主分頁、320／390／768 寬度與離線分析。統一 verify 保留所有既有測試。當前證據存於 `docs/evidence/batch1/`；[本批交接](ANALYSIS-BATCH1.md) 為最新驗收入口，不用舊第一版 PASS 推定本批通過。舊驗收腳本 `verify-published.mjs` 僅適用已發布第一版，本批不執行正式站測試或部署。
+
 第一版新增本機 quick-entry unit 與雙瀏覽器 E2E。`scripts/test-pages.mjs` 刻意在 Pages fixture 留下後端 URL，驗證第一版依然零 API；另一個 integration fixture 繼續原有後端回歸。根目錄網路錯誤測試單獨設定 serviceWorkers:block 以可靠攔截 HTTP，不影響獨立 Worker／離線／更新測試。理由見 [Playwright 官方說明](https://playwright.dev/docs/network#missing-network-events-and-service-workers)。最新結果以 [V1-ACCEPTANCE](V1-ACCEPTANCE.md) 為準。
 
 Pages 最新驗收：`npm run verify` 現在額外執行 `npm run test:pages`，在嚴格 `/money/` 靜態站（無 API、無 SPA fallback）以 Chromium 與 WebKit 手機尺寸驗證。安裝瀏覽器使用 `npx playwright install chromium webkit`。新增 `scripts/workflow-policy.mjs` 驗證 CI 與手動發布範本分離；公開變數白名單有真實負例 build。證據可用 `npm run verify:record -- docs/evidence/pages` 保存，避免覆蓋初始里程碑紀錄。詳見 [Pages 驗收](GITHUB-PAGES.md)。

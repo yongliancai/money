@@ -1,0 +1,5 @@
+
+> ai-bookkeeping-assistant@0.1.0 guardrails
+> node scripts/guardrails.mjs
+
+PASS: architecture boundaries, source secret scan and tracked file policy

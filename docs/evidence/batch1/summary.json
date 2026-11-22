@@ -1,0 +1,101 @@
+{
+  "baseline": "fa222a612fc96f7fc627e31fc985b9b499837d47",
+  "branch": "feature/consumption-analysis-batch1",
+  "startedAt": "2026-11-22T13:54:09.474Z",
+  "node": "v22.23.1",
+  "npm": "10.9.8",
+  "platform": "win32",
+  "results": [
+    {
+      "command": "npm ci",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 5038,
+      "log": "docs/evidence/batch1/01-ci.txt"
+    },
+    {
+      "command": "npm run lint",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 738,
+      "log": "docs/evidence/batch1/02-run-lint.txt"
+    },
+    {
+      "command": "npm run format:check",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 1004,
+      "log": "docs/evidence/batch1/03-run-format-check.txt"
+    },
+    {
+      "command": "npm run guardrails",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 304,
+      "log": "docs/evidence/batch1/04-run-guardrails.txt"
+    },
+    {
+      "command": "npm run docs:check",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 228,
+      "log": "docs/evidence/batch1/05-run-docs-check.txt"
+    },
+    {
+      "command": "npm test",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 809,
+      "log": "docs/evidence/batch1/06-test.txt"
+    },
+    {
+      "command": "npm run build",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 433,
+      "log": "docs/evidence/batch1/07-run-build.txt"
+    },
+    {
+      "command": "npm run build:pages",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 451,
+      "log": "docs/evidence/batch1/08-run-build-pages.txt"
+    },
+    {
+      "command": "npm run test:e2e",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 6584,
+      "log": "docs/evidence/batch1/09-run-test-e2e.txt"
+    },
+    {
+      "command": "npm run test:pages",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 40815,
+      "log": "docs/evidence/batch1/10-run-test-pages.txt"
+    },
+    {
+      "command": "npm run verify",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 50722,
+      "log": "docs/evidence/batch1/11-run-verify.txt"
+    },
+    {
+      "command": "node scripts/regression-proof.mjs",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 181,
+      "log": "docs/evidence/batch1/12-regression-proof.txt"
+    },
+    {
+      "command": "npm audit --audit-level=high",
+      "status": "PASS",
+      "exitCode": 0,
+      "durationMs": 637,
+      "log": "docs/evidence/batch1/13-audit---audit-level=high.txt"
+    }
+  ]
+}

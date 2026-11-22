@@ -1,0 +1,268 @@
+TAP version 13
+# Subtest: editing an old record onto today invalidates zero status and snapshots incomplete atomically
+not ok 1 - editing an old record onto today invalidates zero status and snapshots incomplete atomically
+  ---
+  duration_ms: 27.145
+  type: 'test'
+  location: 'C:\\Users\\w5555\\money\\tests\\integration\\analysis-regression.test.js:20:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    true !== false
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Users/w5555/money/tests/integration/analysis-regression.test.js:29:10)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: import invalidates zero status and updates sync without creating completion activity
+not ok 2 - import invalidates zero status and updates sync without creating completion activity
+  ---
+  duration_ms: 9.9715
+  type: 'test'
+  location: 'C:\\Users\\w5555\\money\\tests\\integration\\analysis-regression.test.js:34:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    true !== false
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Users/w5555/money/tests/integration/analysis-regression.test.js:41:10)
+    runNextTicks (node:internal/process/task_queues:64:5)
+    process.processImmediate (node:internal/timers:452:9)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: imported zero days never complete today after clock advance or timezone change
+not ok 3 - imported zero days never complete today after clock advance or timezone change
+  ---
+  duration_ms: 2.5436
+  type: 'test'
+  location: 'C:\\Users\\w5555\\money\\tests\\integration\\analysis-regression.test.js:45:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    true !== false
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Users/w5555/money/tests/integration/analysis-regression.test.js:49:10)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: renaming a linked item removes stale identity; amount/date edits keep explicit identity
+not ok 4 - renaming a linked item removes stale identity; amount/date edits keep explicit identity
+  ---
+  duration_ms: 4.1276
+  type: 'test'
+  location: 'C:\\Users\\w5555\\money\\tests\\integration\\analysis-regression.test.js:58:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'd25e96fe-65e1-478e-a0e9-3d30ac9f5971'
+    - undefined
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  actual: 'd25e96fe-65e1-478e-a0e9-3d30ac9f5971'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Users/w5555/money/tests/integration/analysis-regression.test.js:65:10)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: imported group identifier collision cannot silently join unrelated existing product
+not ok 5 - imported group identifier collision cannot silently join unrelated existing product
+  ---
+  duration_ms: 3.5049
+  type: 'test'
+  location: 'C:\\Users\\w5555\\money\\tests\\integration\\analysis-regression.test.js:68:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected "actual" to be strictly unequal to:
+    
+    '2d4f429e-ba7d-4a2b-b903-f7599164dd22'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '2d4f429e-ba7d-4a2b-b903-f7599164dd22'
+  actual: '2d4f429e-ba7d-4a2b-b903-f7599164dd22'
+  operator: 'notStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Users/w5555/money/tests/integration/analysis-regression.test.js:75:82)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: ambiguous or orphan backup relationships fail validation before any write
+not ok 6 - ambiguous or orphan backup relationships fail validation before any write
+  ---
+  duration_ms: 2.5954
+  type: 'test'
+  location: 'C:\\Users\\w5555\\money\\tests\\integration\\analysis-regression.test.js:78:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing expected rejection.'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  operator: 'rejects'
+  stack: |-
+    async TestContext.<anonymous> (file:///C:/Users/w5555/money/tests/integration/analysis-regression.test.js:82:3)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: same-day concurrent zero confirmation versus expense insert never leaves a conflict
+ok 7 - same-day concurrent zero confirmation versus expense insert never leaves a conflict
+  ---
+  duration_ms: 3.2043
+  type: 'test'
+  ...
+# Subtest: import failure rolls back expenses, zero status, product links, revisions and outbox; token can retry
+ok 8 - import failure rolls back expenses, zero status, product links, revisions and outbox; token can retry
+  ---
+  duration_ms: 3.4763
+  type: 'test'
+  ...
+# Subtest: v1 upgrade retains real records and activity and permits CRUD and v1/v2 round trips
+ok 9 - v1 upgrade retains real records and activity and permits CRUD and v1/v2 round trips
+  ---
+  duration_ms: 3.6268
+  type: 'test'
+  ...
+# Subtest: history excludes self, same-day, future, unlinked and invalid samples and is sorted by expense date
+not ok 10 - history excludes self, same-day, future, unlinked and invalid samples and is sorted by expense date
+  ---
+  duration_ms: 1.1685
+  type: 'test'
+  location: 'C:\\Users\\w5555\\money\\tests\\unit\\analysis-regression.test.js:6:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    4 !== 2
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 2
+  actual: 4
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Users/w5555/money/tests/unit/analysis-regression.test.js:10:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+# Subtest: history recalculates median and five-sample threshold after edits and removals
+ok 11 - history recalculates median and five-sample threshold after edits and removals
+  ---
+  duration_ms: 1.2577
+  type: 'test'
+  ...
+# Subtest: analysis preserves safe-integer ledger totals and arbitrary category names
+not ok 12 - analysis preserves safe-integer ledger totals and arbitrary category names
+  ---
+  duration_ms: 0.4678
+  type: 'test'
+  location: 'C:\\Users\\w5555\\money\\tests\\unit\\analysis-regression.test.js:23:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 18014398509481982
+    - 18014398509481982n
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 18014398509481982n
+  actual: 18014398509481982
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Users/w5555/money/tests/unit/analysis-regression.test.js:26:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: coverage boundaries require both periods, do not fill unknown days, zero baseline has no percent
+ok 13 - coverage boundaries require both periods, do not fill unknown days, zero baseline has no percent
+  ---
+  duration_ms: 0.4379
+  type: 'test'
+  ...
+# Subtest: calendar periods handle leap February, nonleap, year rollover, and exclude unmatched month tail explicitly
+not ok 14 - calendar periods handle leap February, nonleap, year rollover, and exclude unmatched month tail explicitly
+  ---
+  duration_ms: 0.5877
+  type: 'test'
+  location: 'C:\\Users\\w5555\\money\\tests\\unit\\analysis-regression.test.js:39:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    100 !== 100n
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 100n
+  actual: 100
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///C:/Users/w5555/money/tests/unit/analysis-regression.test.js:45:10)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: mock excludes invalid prices, unmatched offers and invalid/duplicate merchant identities
+not ok 15 - mock excludes invalid prices, unmatched offers and invalid/duplicate merchant identities
+  ---
+  duration_ms: 0.1662
+  type: 'test'
+  location: 'C:\\Users\\w5555\\money\\tests\\unit\\analysis-regression.test.js:48:1'
+  failureType: 'testCodeFailure'
+  error: "Cannot read properties of null (reading 'price')"
+  code: 'ERR_TEST_FAILURE'
+  name: 'TypeError'
+  stack: |-
+    file:///C:/Users/w5555/money/client/src/features/analysis/analysis.js:155:35
+    Array.filter (<anonymous>)
+    validateMockOffers (file:///C:/Users/w5555/money/client/src/features/analysis/analysis.js:154:24)
+    TestContext.<anonymous> (file:///C:/Users/w5555/money/tests/unit/analysis-regression.test.js:50:11)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+1..15
+# tests 15
+# suites 0
+# pass 5
+# fail 10
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 219.8699

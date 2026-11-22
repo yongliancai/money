@@ -49,6 +49,7 @@ test('same-product confirmation requires user consent and never rates fewer than
   page,
 }) => {
   await page.goto('./');
+  await expect(page.locator('#quick-date')).toHaveValue(/^\d{4}-\d{2}-\d{2}$/);
   const today = await page.locator('#quick-date').inputValue();
   const priorDate = await page.evaluate((value) => {
     const d = new Date(value + 'T12:00:00Z');
@@ -73,6 +74,12 @@ test('same-product confirmation requires user consent and never rates fewer than
   const previous = page.locator('#analysis-product-previous');
   await current.selectOption({ index: 2 });
   await previous.selectOption({ index: 1 });
+  page.once('dialog', (dialog) => dialog.dismiss());
+  await page.getByRole('button', { name: '確認兩筆為同商品' }).click();
+  await expect(
+    page.getByRole('button', { name: '確認兩筆為同商品' }),
+  ).toBeEnabled();
+  await expect(page.locator('#analysis-history-result')).toContainText('0 筆');
   page.once('dialog', (dialog) => dialog.accept());
   await page.getByRole('button', { name: '確認兩筆為同商品' }).click();
   await expect(page.locator('#analysis-history-result')).toContainText('1 筆');

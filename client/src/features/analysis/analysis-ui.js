@@ -2,13 +2,13 @@ import {
   sevenDayComparison,
   monthToDateComparison,
   historicalComparison,
-  MOCK_OFFERS,
+  mockPriceProvider,
   validateMockOffers,
+  dateAt,
 } from './analysis.js';
 import { localDate } from '../../../../shared/dates.js';
 
-const fmt = (n) =>
-  Number(n).toLocaleString('zh-TW', { maximumFractionDigits: 2 });
+const fmt = (n) => n.toLocaleString('zh-TW', { maximumFractionDigits: 2 });
 const el = (tag, text, className) => {
   const node = document.createElement(tag);
   if (text !== undefined) node.textContent = text;
@@ -25,9 +25,19 @@ function row(label, value) {
 }
 const labelFor = (e) => `${e.expenseDate} · ${e.item} · NT$${fmt(e.amount)}`;
 
-export function createAnalysisUI(ledger, onSuccess, onFailure) {
+export function createAnalysisUI(
+  ledger,
+  onSuccess,
+  onFailure,
+  priceProvider = mockPriceProvider,
+) {
   const $ = (id) => document.getElementById(id);
-  const state = { mode: 'week', marketId: '', marketShown: false };
+  const state = {
+    mode: 'week',
+    marketId: '',
+    marketShown: false,
+    generation: 0,
+  };
   const fail = (error) => onFailure(error.message || '分析操作失敗');
   function option(select, value, text) {
     const item = el('option', text);
@@ -42,14 +52,17 @@ export function createAnalysisUI(ledger, onSuccess, onFailure) {
     input.value = expenses.some((e) => e.id === old) ? old : '';
   }
   async function render() {
-    const expenses = (await ledger.list()).sort(
+    const generation = ++state.generation;
+    const snapshot = await ledger.analysisSnapshot();
+    if (generation !== state.generation) return;
+    const expenses = snapshot.expenses.sort(
       (a, b) =>
         a.expenseDate.localeCompare(b.expenseDate) ||
         a.createdAt.localeCompare(b.createdAt),
     );
-    const zeroDates = await ledger.zeroDays();
-    const links = await ledger.productLinks();
-    const today = localDate();
+    const zeroDates = snapshot.zeroDates;
+    const links = snapshot.links;
+    const today = localDate(new Date(), snapshot.timeZone);
     const result =
       state.mode === 'week'
         ? sevenDayComparison(expenses, zeroDates, today)
@@ -58,8 +71,34 @@ export function createAnalysisUI(ledger, onSuccess, onFailure) {
     info.replaceChildren();
     const p = result.previous;
     const c = result.current;
+    info.append(row('本期日期', `${c.start} ～ ${c.end}（${c.days} 天）`));
+    info.append(row('前期日期', `${p.start} ～ ${p.end}（${p.days} 天）`));
+    if (state.mode === 'month' && c.end < today)
+      addText(
+        info,
+        'p',
+        `為比較相同天數，本月 ${dateAt(c.end, 1)} ～ ${today} 不納入這次同期比較；紀錄仍保留在帳本。`,
+        'analysis-note',
+      );
     info.append(row('本期已記錄支出', 'NT$' + fmt(c.total)));
     info.append(row('前期已記錄支出', 'NT$' + fmt(p.total)));
+    info.append(
+      row('已記錄消費筆數', `本期 ${c.count} 筆 ／ 前期 ${p.count} 筆`),
+    );
+    info.append(
+      row(
+        '消費筆數差異',
+        `${result.countDifference > 0 ? '+' : ''}${result.countDifference} 筆`,
+      ),
+    );
+    info.append(
+      row(
+        '已記錄支出變化',
+        result.percent === null
+          ? '前期支出為零，百分比無法計算'
+          : `${result.percent > 0 ? '+' : ''}${result.percent.toFixed(1)}%`,
+      ),
+    );
     info.append(
       row(
         '支出差額',
@@ -85,6 +124,13 @@ export function createAnalysisUI(ledger, onSuccess, onFailure) {
           ? '至少一期未達 90%，僅顯示初步變化，不評級。'
           : '至少一期覆蓋率低於 70%，資料不足，不提供趨勢評級。';
     addText(info, 'p', note, 'analysis-note');
+    if (result.status === 'eligible' && result.percent !== null)
+      addText(
+        info,
+        'p',
+        `已記錄支出趨勢：${Math.abs(result.percent) <= 10 ? '大致持平' : result.percent > 0 ? '增加' : '減少'}（±10% 以內視為持平）。`,
+        'analysis-note',
+      );
     const cats = $('analysis-categories');
     cats.replaceChildren();
     for (const e of result.categories)
@@ -150,23 +196,42 @@ export function createAnalysisUI(ledger, onSuccess, onFailure) {
   function showMock(record) {
     const panel = $('analysis-market-result');
     panel.replaceChildren();
-    const mock = validateMockOffers(MOCK_OFFERS, record.amount);
+    const mock = validateMockOffers(
+      priceProvider.getOffers(record),
+      record.amount,
+    );
     addText(panel, 'strong', '【模擬資料，非 Google 即時價格】');
+    addText(
+      panel,
+      'p',
+      `選擇的消費：${labelFor(record)}。所有商家與價格均為示範資料。`,
+      'analysis-note',
+    );
     addText(
       panel,
       'p',
       '使用固定測試報價展示介面與算法。未連接任何付費價格 API。',
       'analysis-note',
     );
-    for (const x of MOCK_OFFERS)
+    for (const x of mock.offers)
       panel.append(row(x.merchant, 'NT$' + fmt(x.price)));
-    panel.append(row('示範報價中位數', 'NT$' + fmt(mock.reference)));
-    panel.append(
-      row(
-        '與此筆消費差額',
-        (mock.difference > 0 ? '+' : '') + 'NT$' + fmt(mock.difference),
-      ),
-    );
+    panel.append(row('有效示範商家', `${mock.sampleSize} 家`));
+    if (mock.reference !== null) {
+      panel.append(row('示範報價中位數', 'NT$' + fmt(mock.reference)));
+      panel.append(
+        row(
+          '與此筆消費差額',
+          (mock.difference > 0 ? '+' : '') + 'NT$' + fmt(mock.difference),
+        ),
+      );
+    }
+    if (!mock.qualified)
+      addText(
+        panel,
+        'p',
+        '資料不足：至少需要 3 家不同商家的有效示範報價；無法提供市場評級。',
+        'analysis-note',
+      );
     addText(
       panel,
       'p',
@@ -175,18 +240,30 @@ export function createAnalysisUI(ledger, onSuccess, onFailure) {
     );
   }
   async function action(operation) {
+    if (state.busy) return;
+    state.busy = true;
+    const buttons = [
+      'analysis-confirm-match',
+      'analysis-unlink',
+      'analysis-confirm-zero',
+      'analysis-cancel-zero',
+    ].map($);
+    for (const button of buttons) button.disabled = true;
     try {
       await operation();
       await render();
       onSuccess();
     } catch (error) {
       fail(error);
+    } finally {
+      state.busy = false;
+      for (const button of buttons) button.disabled = false;
     }
   }
   function mount() {
-    $('analysis-period-mode').addEventListener('change', async (e) => {
+    $('analysis-period-mode').addEventListener('change', (e) => {
       state.mode = e.target.value;
-      await render();
+      void render().catch(fail);
     });
     $('analysis-product-current').addEventListener(
       'change',
@@ -248,6 +325,11 @@ export function createAnalysisUI(ledger, onSuccess, onFailure) {
       state.marketShown = true;
       state.marketId = id;
       void render().catch(fail);
+    });
+    $('analysis-market-product').addEventListener('change', () => {
+      state.marketShown = false;
+      state.marketId = '';
+      $('analysis-market-result').replaceChildren();
     });
   }
   return { mount, render };

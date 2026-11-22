@@ -65,7 +65,20 @@ const backupV2Schema = z
       .array(z.object({ expenseId: z.uuid(), productId: z.uuid() }).strict())
       .max(20000),
   })
-  .strict();
+  .strict()
+  .superRefine((backup, context) => {
+    const records = new Set(backup.expenses.map((e) => e.id));
+    const linked = new Set();
+    for (const link of backup.productLinks) {
+      if (!records.has(link.expenseId) || linked.has(link.expenseId))
+        context.addIssue({
+          code: 'custom',
+          message: '商品對應必須指向備份中的紀錄，且每筆紀錄只能有一個商品群組',
+          path: ['productLinks'],
+        });
+      linked.add(link.expenseId);
+    }
+  });
 export const backupSchema = z.union([backupV1Schema, backupV2Schema]);
 export const aiResultSchema = z
   .object({

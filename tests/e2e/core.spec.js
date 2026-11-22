@@ -14,6 +14,9 @@ async function manual(page, item = '午餐', amount = '120') {
     .locator('#expense-form')
     .getByRole('button', { name: '確認儲存', exact: true })
     .click();
+  await expect(page.locator('#expense-dialog')).not.toBeVisible();
+  await expect(page.locator('#message')).toContainText('已儲存在本機帳本');
+  await expect(page.locator('#expense-form button[type=submit]')).toBeEnabled();
 }
 test('manual CRUD, monthly total and today completion regression', async ({
   page,
@@ -129,7 +132,12 @@ test.describe('isolated network-error interception', () => {
       }),
     );
     await page.getByLabel('花費描述').fill('午餐120');
+    const failedResponse = page.waitForResponse(
+      (response) =>
+        response.url().endsWith('/api/ai/parse') && response.status() === 503,
+    );
     await page.getByRole('button', { name: '解析並預覽' }).click();
+    await failedResponse;
     await expect(page.locator('#message')).toContainText('手動記帳');
     await page.getByRole('button', { name: '資料備份' }).click();
     await page.locator('#import-file').setInputFiles({

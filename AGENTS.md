@@ -1,5 +1,7 @@
 # AI 工程入口
 
+本次第一批消費分析收尾：只更新 `feature/consumption-analysis-batch1` 與 Draft PR #3，禁止合併 main、發布 Pages、付費 API、正式資料與擴權。先前第一版的一次發布授權已完成，不適用本批。先讀 [本批需求與驗收](docs/ANALYSIS-BATCH1.md)。
+
 最新授權（2026-11-22）：使用者明確批准將 yongliancai/money 第一版合併 main、啟用 GitHub Pages 並正式發布，也批准必要的電腦操作。此一次發布授權取代下列歷史發布限制；仍須通過 CI，僅能手動觸發發布，不得擴大至其他資源、秘密或後續自動發布。詳見 [發布紀錄](docs/RELEASE.md)。
 
 先讀 [主工程規範](docs/PROJECT-ENGINEERING.md)、[已確認需求](docs/REQUIREMENTS.md)、[架構](docs/ARCHITECTURE.md) 與 [待決 ADR](docs/DECISIONS/README.md)。

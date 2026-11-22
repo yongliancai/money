@@ -21,11 +21,16 @@ const stores = [
 export async function openLedger(
   name = 'bookkeeping-v1',
   clock = () => new Date(),
+  onBlocked = () => {},
 ) {
   const db = await openDB(name, 2, {
     upgrade(db) {
       for (const store of stores)
         if (!db.objectStoreNames.contains(store)) db.createObjectStore(store);
+    },
+    blocked: onBlocked,
+    blocking() {
+      db.close();
     },
   });
   const previews = new Map();
@@ -41,7 +46,10 @@ export async function openLedger(
   async function completed(tx, now, zone) {
     const currentDate = localDate(now, zone);
     const zero = await tx.objectStore('dailyStatus').get(currentDate);
-    if (zero?.confirmed) return true;
+    // Imported confirmations may contribute historical coverage, never local completion.
+    // Legacy v2 imports have confirmedAt:null, so preserve that provenance as well.
+    if (zero?.confirmed && zero.confirmedAt && zero.origin !== 'import')
+      return true;
     const activity = await tx.objectStore('activity').getAll();
     return activity.some(
       (a) => localDate(new Date(a.createdAt), zone) === localDate(now, zone),
@@ -78,19 +86,40 @@ export async function openLedger(
       throw error;
     }
   }
+  async function analysisSnapshot() {
+    const tx = db.transaction([
+      'expenses',
+      'dailyStatus',
+      'productLinks',
+      'settings',
+    ]);
+    const [expenses, statuses, ids, products, config] = await Promise.all([
+      tx.objectStore('expenses').getAll(),
+      tx.objectStore('dailyStatus').getAll(),
+      tx.objectStore('productLinks').getAllKeys(),
+      tx.objectStore('productLinks').getAll(),
+      tx.objectStore('settings').get('reminder'),
+    ]);
+    await tx.done;
+    return {
+      expenses,
+      zeroDates: statuses.filter((x) => x.confirmed).map((x) => x.date),
+      links: Object.fromEntries(ids.map((id, i) => [id, products[i]])),
+      timeZone: (config || defaults).timeZone,
+    };
+  }
   return {
     db,
     list: () => db.getAll('expenses'),
     settings,
+    analysisSnapshot,
     async zeroDays() {
       return (await db.getAll('dailyStatus'))
         .filter((x) => x.confirmed)
         .map((x) => x.date);
     },
     async productLinks() {
-      const ids = await db.getAllKeys('productLinks');
-      const products = await db.getAll('productLinks');
-      return Object.fromEntries(ids.map((id, i) => [id, products[i]]));
+      return (await analysisSnapshot()).links;
     },
     async linkProducts(expenseIds) {
       if (
@@ -134,9 +163,15 @@ export async function openLedger(
         const records = await tx.objectStore('expenses').getAll();
         if (records.some((e) => e.expenseDate === date))
           throw new Error('這一天已有消費紀錄，不能標示零支出');
-        await tx
-          .objectStore('dailyStatus')
-          .put({ date, confirmed: true, confirmedAt: now.toISOString() }, date);
+        await tx.objectStore('dailyStatus').put(
+          {
+            date,
+            confirmed: true,
+            confirmedAt: now.toISOString(),
+            origin: 'manual',
+          },
+          date,
+        );
         if (date === today) await snapshot(tx, now);
       });
     },
@@ -149,9 +184,12 @@ export async function openLedger(
       });
     },
     async isCompleted() {
-      const zone = (await settings()).timeZone;
-      const tx = db.transaction(['activity', 'dailyStatus']);
-      return completed(tx, clock(), zone);
+      const tx = db.transaction(['activity', 'dailyStatus', 'settings']);
+      const config =
+        (await tx.objectStore('settings').get('reminder')) || defaults;
+      const result = await completed(tx, clock(), config.timeZone);
+      await tx.done;
+      return result;
     },
     async saveSettings(input) {
       return mutate(async (tx, now) => {
@@ -221,10 +259,13 @@ export async function openLedger(
       return mutate(async (tx, now) => {
         const previous = await tx.objectStore('expenses').get(id);
         if (!previous) throw new Error('找不到紀錄');
+        if (previous.item !== draft.item)
+          await tx.objectStore('productLinks').delete(id);
         await tx.objectStore('dailyStatus').delete(draft.expenseDate);
         await tx
           .objectStore('expenses')
           .put({ ...previous, ...draft, updatedAt: now.toISOString() }, id);
+        await snapshot(tx, now);
       });
     },
     async remove(id) {
@@ -255,18 +296,14 @@ export async function openLedger(
       await db.delete('outbox', id);
     },
     async exportJSON() {
+      const state = await analysisSnapshot();
       return {
         schemaVersion: 2,
         exportedAt: clock().toISOString(),
-        expenses: await db.getAll('expenses'),
-        zeroDays: (await db.getAll('dailyStatus'))
-          .filter((v) => v.confirmed)
-          .map((v) => ({ date: v.date, confirmed: true })),
-        productLinks: await Promise.all(
-          (await db.getAllKeys('productLinks')).map(async (expenseId) => ({
-            expenseId,
-            productId: await db.get('productLinks', expenseId),
-          })),
+        expenses: state.expenses,
+        zeroDays: state.zeroDates.map((date) => ({ date, confirmed: true })),
+        productLinks: Object.entries(state.links).map(
+          ([expenseId, productId]) => ({ expenseId, productId }),
         ),
       };
     },
@@ -297,14 +334,24 @@ export async function openLedger(
         zeroDays: backup.schemaVersion === 2 ? backup.zeroDays : [],
         productLinks: backup.schemaVersion === 2 ? backup.productLinks : [],
       });
-      return { token, added, restored, duplicates };
+      return {
+        token,
+        added,
+        restored,
+        duplicates,
+        zeroDays: structuredClone(
+          backup.schemaVersion === 2 ? backup.zeroDays : [],
+        ),
+        productLinkCount:
+          backup.schemaVersion === 2 ? backup.productLinks.length : 0,
+      };
     },
     async confirmImport(token) {
       const preview = previews.get(token);
       if (!preview?.import) throw new Error('匯入預覽已失效');
       previews.delete(token);
       try {
-        return await mutate(async (tx) => {
+        return await mutate(async (tx, now) => {
           let count = 0;
           const restoredIds = new Set();
           for (const record of preview.import) {
@@ -317,15 +364,26 @@ export async function openLedger(
             await tx.objectStore('tombstones').delete(record.id);
             count++;
           }
+          const existingGroups = new Set(
+            await tx.objectStore('productLinks').getAll(),
+          );
+          const importedGroups = new Map();
           for (const link of preview.productLinks || []) {
+            if (!importedGroups.has(link.productId))
+              importedGroups.set(
+                link.productId,
+                existingGroups.has(link.productId)
+                  ? crypto.randomUUID()
+                  : link.productId,
+              );
             if (restoredIds.has(link.expenseId))
               await tx
                 .objectStore('productLinks')
-                .put(link.productId, link.expenseId);
+                .put(importedGroups.get(link.productId), link.expenseId);
           }
           const config =
             (await tx.objectStore('settings').get('reminder')) || defaults;
-          const today = localDate(clock(), config.timeZone);
+          const today = localDate(now, config.timeZone);
           const current = await tx.objectStore('expenses').getAll();
           for (const zero of preview.zeroDays || []) {
             if (
@@ -334,14 +392,18 @@ export async function openLedger(
             )
               continue;
             if (!(await tx.objectStore('dailyStatus').get(zero.date)))
-              await tx
-                .objectStore('dailyStatus')
-                .put(
-                  { date: zero.date, confirmed: true, confirmedAt: null },
-                  zero.date,
-                );
+              await tx.objectStore('dailyStatus').put(
+                {
+                  date: zero.date,
+                  confirmed: true,
+                  confirmedAt: null,
+                  origin: 'import',
+                },
+                zero.date,
+              );
           }
           // Imported records and zero confirmations never create today's completion.
+          await snapshot(tx, now);
           return count;
         });
       } catch (error) {

@@ -1,0 +1,203 @@
+
+> ai-bookkeeping-assistant@0.1.0 test:pages
+> node scripts/test-pages.mjs
+
+vite v8.3.8 building client environment for pages...
+transforming...
+✓ 112 modules transformed.
+rendering chunks...
+computing gzip size...
+dist-pages/index.html                  19.66 kB │ gzip:  5.79 kB
+dist-pages/assets/index-C2WfCH-Q.css   12.45 kB │ gzip:  3.61 kB
+dist-pages/assets/index-VMlKROOr.js   131.83 kB │ gzip: 40.96 kB
+
+✓ built in 329ms
+PASS: HTML, manifest, icons and service worker share /money/
+vite v8.3.8 building client environment for integration...
+transforming...
+✓ 112 modules transformed.
+rendering chunks...
+computing gzip size...
+.tmp/pages-connected/index.html                  19.66 kB │ gzip:  5.79 kB
+.tmp/pages-connected/assets/index-C2WfCH-Q.css   12.45 kB │ gzip:  3.61 kB
+.tmp/pages-connected/assets/index-QRD4tWrg.js   131.90 kB │ gzip: 40.95 kB
+
+✓ built in 111ms
+[WebServer] (node:17164) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:40456) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:9488) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] (node:9488) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+
+Running 26 tests using 1 worker
+
+(node:15068) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 [chromium] › tests\pages\analysis-regression.spec.js:16:1 › real browser v1 upgrade retains data, createdAt and v2 backup and CRUD (1.0s)
+  ok  2 [chromium] › tests\pages\analysis-regression.spec.js:107:1 › five-sample rating recalculates after edit and deletion and market selection clears stale demonstration (870ms)
+  x   3 [chromium] › tests\pages\analysis-regression.spec.js:189:1 › mobile three-tab navigation, keyboard labels, explicit equal-month dates and offline analysis (317ms)
+(node:18100) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  4 [chromium] › tests\pages\analysis.spec.js:3:1 › zero-spend confirmation, analysis tabs and simulated market offer never call an API (775ms)
+  ok  5 [chromium] › tests\pages\analysis.spec.js:48:1 › same-product confirmation requires user consent and never rates fewer than 5 earlier records (622ms)
+  ok  6 [chromium] › tests\pages\pages.spec.js:36:1 › strict Pages subpath assets, manifest and installation metadata work without backend requests (480ms)
+  ok  7 [chromium] › tests\pages\pages.spec.js:88:1 › manual CRUD persists after reload and monthly totals follow expense date under /money/ (910ms)
+  ok  8 [chromium] › tests\pages\pages.spec.js:124:1 › JSON and CSV exports, preview/cancel, restore and merge dedup work without a backend (1.0s)
+  ok  9 [chromium] › tests\pages\pages.spec.js:158:1 › offline reload and worker replacement retain IndexedDB and neighboring application caches (2.8s)
+  ok 10 [chromium] › tests\pages\pages.spec.js:212:1 › explicit independent backend passes real CORS and AI preview gate, then degrades on backend failure (743ms)
+  ok 11 [chromium] › tests\pages\quick-entry.spec.js:4:1 › conflicts, unknown categories and missing amounts require editable review without losing a line (542ms)
+  ok 12 [chromium] › tests\pages\quick-entry.spec.js:36:1 › offline quick entry confirms exactly once, survives reload and reports today without background notification controls (757ms)
+  ok 13 [chromium] › tests\pages\quick-entry.spec.js:85:1 › local quick entry parses four examples without writing before explicit confirmation (527ms)
+(node:11376) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 14 [webkit] › tests\pages\analysis-regression.spec.js:16:1 › real browser v1 upgrade retains data, createdAt and v2 backup and CRUD (1.9s)
+  x  15 [webkit] › tests\pages\analysis-regression.spec.js:107:1 › five-sample rating recalculates after edit and deletion and market selection clears stale demonstration (353ms)
+(node:22128) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  16 [webkit] › tests\pages\analysis-regression.spec.js:189:1 › mobile three-tab navigation, keyboard labels, explicit equal-month dates and offline analysis (451ms)
+(node:36904) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 17 [webkit] › tests\pages\analysis.spec.js:3:1 › zero-spend confirmation, analysis tabs and simulated market offer never call an API (2.1s)
+  x  18 [webkit] › tests\pages\analysis.spec.js:48:1 › same-product confirmation requires user consent and never rates fewer than 5 earlier records (324ms)
+(node:2804) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 19 [webkit] › tests\pages\pages.spec.js:36:1 › strict Pages subpath assets, manifest and installation metadata work without backend requests (1.1s)
+  ok 20 [webkit] › tests\pages\pages.spec.js:88:1 › manual CRUD persists after reload and monthly totals follow expense date under /money/ (2.4s)
+  ok 21 [webkit] › tests\pages\pages.spec.js:124:1 › JSON and CSV exports, preview/cancel, restore and merge dedup work without a backend (2.5s)
+  ok 22 [webkit] › tests\pages\pages.spec.js:158:1 › offline reload and worker replacement retain IndexedDB and neighboring application caches (2.0s)
+  ok 23 [webkit] › tests\pages\pages.spec.js:212:1 › explicit independent backend passes real CORS and AI preview gate, then degrades on backend failure (2.0s)
+  ok 24 [webkit] › tests\pages\quick-entry.spec.js:4:1 › conflicts, unknown categories and missing amounts require editable review without losing a line (1.1s)
+  ok 25 [webkit] › tests\pages\quick-entry.spec.js:36:1 › offline quick entry confirms exactly once, survives reload and reports today without background notification controls (1.5s)
+  ok 26 [webkit] › tests\pages\quick-entry.spec.js:85:1 › local quick entry parses four examples without writing before explicit confirmation (1.1s)
+
+
+  1) [chromium] › tests\pages\analysis-regression.spec.js:189:1 › mobile three-tab navigation, keyboard labels, explicit equal-month dates and offline analysis 
+
+    Error: locator.click: Error: strict mode violation: getByRole('button', { name: '快速記帳' }) resolved to 2 elements:
+        1) <button aria-current="page" data-view="overview" class="nav-button active">…</button> aka getByRole('button', { name: '◫ 快速記帳' })
+        2) <button type="submit" class="primary">預覽快速記帳</button> aka getByRole('button', { name: '預覽快速記帳' })
+
+    Call log:
+      - waiting for getByRole('button', { name: '快速記帳' })
+
+
+      2 | import { mkdirSync } from 'node:fs';
+      3 | const enter = async (page, item, amount, date) => {
+    > 4 |   await page.getByRole('button', { name: '快速記帳' }).click();
+        |                                                    ^
+      5 |   await page.getByRole('button', { name: '＋ 手動記帳' }).click();
+      6 |   await page.getByLabel('品項', { exact: true }).fill(item);
+      7 |   await page.getByLabel('金額（TWD）', { exact: true }).fill(String(amount));
+        at enter (C:\Users\w5555\money\tests\pages\analysis-regression.spec.js:4:52)
+        at C:\Users\w5555\money\tests\pages\analysis-regression.spec.js:202:9
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\pages\analysis-regression-mobile-921d3--dates-and-offline-analysis-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\pages\analysis-regression-mobile-921d3--dates-and-offline-analysis-chromium\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\pages\analysis-regression-mobile-921d3--dates-and-offline-analysis-chromium\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\pages\analysis-regression-mobile-921d3--dates-and-offline-analysis-chromium\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [webkit] › tests\pages\analysis-regression.spec.js:107:1 › five-sample rating recalculates after edit and deletion and market selection clears stale demonstration 
+
+    Error: page.evaluate: RangeError: Invalid Date
+
+      110 |   await page.goto('./');
+      111 |   const today = await page.locator('#quick-date').inputValue();
+    > 112 |   const backup = await page.evaluate((today) => {
+          |                             ^
+      113 |     const group = crypto.randomUUID();
+      114 |     const records = Array.from({ length: 6 }, (_, i) => {
+      115 |       const d = new Date(today + 'T12:00:00Z');
+        at C:\Users\w5555\money\tests\pages\analysis-regression.spec.js:112:29
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\pages\analysis-regression-five-s-ebc61--clears-stale-demonstration-webkit\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\pages\analysis-regression-five-s-ebc61--clears-stale-demonstration-webkit\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\pages\analysis-regression-five-s-ebc61--clears-stale-demonstration-webkit\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\pages\analysis-regression-five-s-ebc61--clears-stale-demonstration-webkit\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [webkit] › tests\pages\analysis-regression.spec.js:189:1 › mobile three-tab navigation, keyboard labels, explicit equal-month dates and offline analysis 
+
+    Error: locator.click: Error: strict mode violation: getByRole('button', { name: '快速記帳' }) resolved to 2 elements:
+        1) <button aria-current="page" data-view="overview" class="nav-button active">…</button> aka getByRole('button', { name: '◫ 快速記帳' })
+        2) <button type="submit" class="primary">預覽快速記帳</button> aka getByRole('button', { name: '預覽快速記帳' })
+
+    Call log:
+      - waiting for getByRole('button', { name: '快速記帳' })
+
+
+      2 | import { mkdirSync } from 'node:fs';
+      3 | const enter = async (page, item, amount, date) => {
+    > 4 |   await page.getByRole('button', { name: '快速記帳' }).click();
+        |                                                    ^
+      5 |   await page.getByRole('button', { name: '＋ 手動記帳' }).click();
+      6 |   await page.getByLabel('品項', { exact: true }).fill(item);
+      7 |   await page.getByLabel('金額（TWD）', { exact: true }).fill(String(amount));
+        at enter (C:\Users\w5555\money\tests\pages\analysis-regression.spec.js:4:52)
+        at C:\Users\w5555\money\tests\pages\analysis-regression.spec.js:202:9
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\pages\analysis-regression-mobile-921d3--dates-and-offline-analysis-webkit\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\pages\analysis-regression-mobile-921d3--dates-and-offline-analysis-webkit\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\pages\analysis-regression-mobile-921d3--dates-and-offline-analysis-webkit\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\pages\analysis-regression-mobile-921d3--dates-and-offline-analysis-webkit\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [webkit] › tests\pages\analysis.spec.js:48:1 › same-product confirmation requires user consent and never rates fewer than 5 earlier records 
+
+    Error: page.evaluate: RangeError: Invalid Date
+
+      51 |   await page.goto('./');
+      52 |   const today = await page.locator('#quick-date').inputValue();
+    > 53 |   const priorDate = await page.evaluate((value) => {
+         |                                ^
+      54 |     const d = new Date(value + 'T12:00:00Z');
+      55 |     d.setUTCDate(d.getUTCDate() - 1);
+      56 |     return d.toISOString().slice(0, 10);
+        at C:\Users\w5555\money\tests\pages\analysis.spec.js:53:32
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\pages\analysis-same-product-conf-19783-ewer-than-5-earlier-records-webkit\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\pages\analysis-same-product-conf-19783-ewer-than-5-earlier-records-webkit\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\pages\analysis-same-product-conf-19783-ewer-than-5-earlier-records-webkit\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\pages\analysis-same-product-conf-19783-ewer-than-5-earlier-records-webkit\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4 failed
+    [chromium] › tests\pages\analysis-regression.spec.js:189:1 › mobile three-tab navigation, keyboard labels, explicit equal-month dates and offline analysis 
+    [webkit] › tests\pages\analysis-regression.spec.js:107:1 › five-sample rating recalculates after edit and deletion and market selection clears stale demonstration 
+    [webkit] › tests\pages\analysis-regression.spec.js:189:1 › mobile three-tab navigation, keyboard labels, explicit equal-month dates and offline analysis 
+    [webkit] › tests\pages\analysis.spec.js:48:1 › same-product confirmation requires user consent and never rates fewer than 5 earlier records 
+  22 passed (35.5s)

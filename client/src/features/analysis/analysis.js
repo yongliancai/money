@@ -26,12 +26,20 @@ export function historicalComparison(expenses, links, expenseId) {
         (e) =>
           e.id !== expenseId &&
           links[e.id] === productId &&
-          e.expenseDate < target.expenseDate,
+          e.expenseDate < target.expenseDate &&
+          Number.isSafeInteger(e.amount) &&
+          e.amount > 0,
       )
     : [];
   // Existing records do not contain a verified quantity/unit. Compare transaction totals only.
   // A future unit-price score must require confirmed identical pack size and quantity.
-  const prices = historical.map((e) => e.amount).filter(Number.isFinite);
+  historical.sort(
+    (a, b) =>
+      a.expenseDate.localeCompare(b.expenseDate) ||
+      (a.createdAt || '').localeCompare(b.createdAt || '') ||
+      a.id.localeCompare(b.id),
+  );
+  const prices = historical.map((e) => e.amount);
   const reference = median(prices);
   const delta = reference === null ? null : target.amount - reference;
   return {
@@ -66,13 +74,13 @@ export function periodSummary(expenses, zeroDates, start, end) {
   for (const date of zeroDates)
     if (date >= start && date <= end) included.add(date);
   const days = inclusiveDays(start, end);
-  const categories = {};
+  const categories = Object.create(null);
   for (const e of records)
-    categories[e.category] = (categories[e.category] || 0) + e.amount;
+    categories[e.category] = (categories[e.category] || 0n) + BigInt(e.amount);
   return {
     start,
     end,
-    total: records.reduce((n, e) => n + e.amount, 0),
+    total: records.reduce((n, e) => n + BigInt(e.amount), 0n),
     count: records.length,
     covered: days.filter((d) => included.has(d)).length,
     days: days.length,
@@ -103,9 +111,11 @@ export function comparePeriods(
     previous,
     status,
     difference: current.total - previous.total,
+    countDifference: current.count - previous.count,
     percent:
       previous.total > 0
-        ? ((current.total - previous.total) / previous.total) * 100
+        ? (Number(current.total - previous.total) / Number(previous.total)) *
+          100
         : null,
     categories: [
       ...new Set([
@@ -114,8 +124,8 @@ export function comparePeriods(
       ]),
     ].map((name) => ({
       name,
-      current: current.categories[name] || 0,
-      previous: previous.categories[name] || 0,
+      current: current.categories[name] || 0n,
+      previous: previous.categories[name] || 0n,
     })),
   };
 }
@@ -152,13 +162,23 @@ export function monthToDateComparison(expenses, zeroDates, today) {
 }
 export function validateMockOffers(offers, ownPrice) {
   const valid = offers.filter(
-    (o) => Number.isSafeInteger(o.price) && o.price > 0 && o.match === 'exact',
+    (o) =>
+      o &&
+      typeof o.merchant === 'string' &&
+      o.merchant.trim() &&
+      Number.isSafeInteger(o.price) &&
+      o.price > 0 &&
+      o.match === 'exact',
   );
   const merchants = new Map();
   for (const offer of valid)
-    if (!merchants.has(offer.merchant))
-      merchants.set(offer.merchant, offer.price);
-  const values = [...merchants.values()];
+    if (!merchants.has(offer.merchant.normalize('NFKC').trim().toLowerCase()))
+      merchants.set(
+        offer.merchant.normalize('NFKC').trim().toLowerCase(),
+        offer,
+      );
+  const validOffers = [...merchants.values()];
+  const values = validOffers.map((o) => o.price);
   const reference = median(values);
   return {
     sampleSize: values.length,
@@ -166,6 +186,7 @@ export function validateMockOffers(offers, ownPrice) {
     qualified: values.length >= 3,
     difference: reference === null ? null : ownPrice - reference,
     simulated: true,
+    offers: validOffers,
   };
 }
 export const MOCK_OFFERS = [
@@ -188,3 +209,8 @@ export const MOCK_OFFERS = [
     match: 'exact',
   },
 ];
+// PriceProvider contract: getOffers(record) returns candidate offers, with no ledger writes.
+// This batch deliberately has no HTTP provider, credentials or paid requests.
+export const mockPriceProvider = {
+  getOffers: () => MOCK_OFFERS.map((offer) => ({ ...offer })),
+};

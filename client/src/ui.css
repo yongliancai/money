@@ -903,6 +903,16 @@ footer {
 }
 
 /* Consumption analysis: keep results legible on small screens. */
+.utility-nav {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 8px 0;
+}
+.utility-nav button {
+  min-height: 44px;
+}
 .analysis-zero-shortcut {
   display: flex;
   align-items: center;

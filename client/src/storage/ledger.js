@@ -23,7 +23,8 @@ export async function openLedger(
 ) {
   const db = await openDB(name, 2, {
     upgrade(db) {
-      for (const store of stores) if (!db.objectStoreNames.contains(store)) db.createObjectStore(store);
+      for (const store of stores)
+        if (!db.objectStoreNames.contains(store)) db.createObjectStore(store);
     },
   });
   const previews = new Map();
@@ -81,7 +82,9 @@ export async function openLedger(
     list: () => db.getAll('expenses'),
     settings,
     async zeroDays() {
-      return (await db.getAll('dailyStatus')).filter((x) => x.confirmed).map((x) => x.date);
+      return (await db.getAll('dailyStatus'))
+        .filter((x) => x.confirmed)
+        .map((x) => x.date);
     },
     async productLinks() {
       const ids = await db.getAllKeys('productLinks');
@@ -89,14 +92,30 @@ export async function openLedger(
       return Object.fromEntries(ids.map((id, i) => [id, products[i]]));
     },
     async linkProducts(expenseIds) {
-      if (!Array.isArray(expenseIds) || expenseIds.length < 2 || new Set(expenseIds).size !== expenseIds.length) throw new Error('請選擇至少兩筆不同紀錄');
+      if (
+        !Array.isArray(expenseIds) ||
+        expenseIds.length < 2 ||
+        new Set(expenseIds).size !== expenseIds.length
+      )
+        throw new Error('請選擇至少兩筆不同紀錄');
       return mutate(async (tx) => {
-        const entries = await Promise.all(expenseIds.map(async (id) => ({ id, expense: await tx.objectStore('expenses').get(id), link: await tx.objectStore('productLinks').get(id) })));
-        if (entries.some((e) => !e.expense)) throw new Error('部分紀錄已不存在');
-        const existing = [...new Set(entries.map((e) => e.link).filter(Boolean))];
-        if (existing.length > 1) throw new Error('已屬於不同商品群組，請先解除錯誤對應');
+        const entries = await Promise.all(
+          expenseIds.map(async (id) => ({
+            id,
+            expense: await tx.objectStore('expenses').get(id),
+            link: await tx.objectStore('productLinks').get(id),
+          })),
+        );
+        if (entries.some((e) => !e.expense))
+          throw new Error('部分紀錄已不存在');
+        const existing = [
+          ...new Set(entries.map((e) => e.link).filter(Boolean)),
+        ];
+        if (existing.length > 1)
+          throw new Error('已屬於不同商品群組，請先解除錯誤對應');
         const productId = existing[0] || crypto.randomUUID();
-        for (const e of entries) await tx.objectStore('productLinks').put(productId, e.id);
+        for (const e of entries)
+          await tx.objectStore('productLinks').put(productId, e.id);
         return productId;
       });
     },
@@ -106,18 +125,28 @@ export async function openLedger(
     async confirmZeroSpend(date) {
       if (!date) date = localDate(clock(), (await settings()).timeZone);
       return mutate(async (tx, now) => {
-        const config = (await tx.objectStore('settings').get('reminder')) || defaults;
+        const config =
+          (await tx.objectStore('settings').get('reminder')) || defaults;
         const today = localDate(now, config.timeZone);
-        if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || Number.isNaN(new Date(date + 'T12:00:00Z').valueOf()) || date > today) throw new Error('只能確認今天或過去的有效日期');
+        if (
+          !/^\d{4}-\d{2}-\d{2}$/.test(date) ||
+          Number.isNaN(new Date(date + 'T12:00:00Z').valueOf()) ||
+          date > today
+        )
+          throw new Error('只能確認今天或過去的有效日期');
         const records = await tx.objectStore('expenses').getAll();
-        if (records.some((e) => e.expenseDate === date)) throw new Error('這一天已有消費紀錄，不能標示零支出');
-        await tx.objectStore('dailyStatus').put({date, confirmed:true, confirmedAt:now.toISOString()}, date);
+        if (records.some((e) => e.expenseDate === date))
+          throw new Error('這一天已有消費紀錄，不能標示零支出');
+        await tx
+          .objectStore('dailyStatus')
+          .put({ date, confirmed: true, confirmedAt: now.toISOString() }, date);
         if (date === today) await snapshot(tx, now);
       });
     },
     async clearZeroSpend(date) {
       return mutate(async (tx, now) => {
-        const config = (await tx.objectStore('settings').get('reminder')) || defaults;
+        const config =
+          (await tx.objectStore('settings').get('reminder')) || defaults;
         await tx.objectStore('dailyStatus').delete(date);
         if (date === localDate(now, config.timeZone)) await snapshot(tx, now);
       });
@@ -233,8 +262,15 @@ export async function openLedger(
         schemaVersion: 2,
         exportedAt: clock().toISOString(),
         expenses: await db.getAll('expenses'),
-        zeroDays: (await db.getAll('dailyStatus')).filter((v) => v.confirmed).map((v) => ({date:v.date, confirmed:true})),
-        productLinks: (await Promise.all((await db.getAllKeys('productLinks')).map(async (expenseId) => ({ expenseId, productId: await db.get('productLinks',expenseId) })))),
+        zeroDays: (await db.getAll('dailyStatus'))
+          .filter((v) => v.confirmed)
+          .map((v) => ({ date: v.date, confirmed: true })),
+        productLinks: await Promise.all(
+          (await db.getAllKeys('productLinks')).map(async (expenseId) => ({
+            expenseId,
+            productId: await db.get('productLinks', expenseId),
+          })),
+        ),
       };
     },
     async previewImport(raw) {
@@ -259,7 +295,11 @@ export async function openLedger(
         if (tombstones.has(record.id)) restored.push(record);
       }
       const token = crypto.randomUUID();
-      previews.set(token, { import: added, zeroDays: backup.schemaVersion === 2 ? backup.zeroDays : [], productLinks: backup.schemaVersion === 2 ? backup.productLinks : [] });
+      previews.set(token, {
+        import: added,
+        zeroDays: backup.schemaVersion === 2 ? backup.zeroDays : [],
+        productLinks: backup.schemaVersion === 2 ? backup.productLinks : [],
+      });
       return { token, added, restored, duplicates };
     },
     async confirmImport(token) {
@@ -281,14 +321,28 @@ export async function openLedger(
             count++;
           }
           for (const link of preview.productLinks || []) {
-            if (restoredIds.has(link.expenseId)) await tx.objectStore('productLinks').put(link.productId, link.expenseId);
+            if (restoredIds.has(link.expenseId))
+              await tx
+                .objectStore('productLinks')
+                .put(link.productId, link.expenseId);
           }
-          const config = (await tx.objectStore('settings').get('reminder')) || defaults;
+          const config =
+            (await tx.objectStore('settings').get('reminder')) || defaults;
           const today = localDate(clock(), config.timeZone);
           const current = await tx.objectStore('expenses').getAll();
           for (const zero of preview.zeroDays || []) {
-            if (zero.date === today || current.some((e) => e.expenseDate === zero.date)) continue;
-            if (!await tx.objectStore('dailyStatus').get(zero.date)) await tx.objectStore('dailyStatus').put({date:zero.date, confirmed:true, confirmedAt:null}, zero.date);
+            if (
+              zero.date === today ||
+              current.some((e) => e.expenseDate === zero.date)
+            )
+              continue;
+            if (!(await tx.objectStore('dailyStatus').get(zero.date)))
+              await tx
+                .objectStore('dailyStatus')
+                .put(
+                  { date: zero.date, confirmed: true, confirmedAt: null },
+                  zero.date,
+                );
           }
           // Imported records and zero confirmations never create today's completion.
           return count;

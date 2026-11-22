@@ -343,7 +343,11 @@ async function init() {
   ledger = await openLedger();
   analysisUI = createAnalysisUI(
     ledger,
-    () => { message('消費分析資料已更新。'); void render(); void syncNow(); },
+    () => {
+      message('消費分析資料已更新。');
+      void render();
+      void syncNow();
+    },
     (text) => message(text, true),
   );
   analysisUI.mount();
@@ -374,7 +378,8 @@ async function init() {
     });
   bind('add-manual', 'click', () => openExpense());
   bind('today-zero-button', 'click', async () => {
-    if (!window.confirm('確認今天完全沒有消費嗎？若當天已有紀錄則無法確認。')) return;
+    if (!window.confirm('確認今天完全沒有消費嗎？若當天已有紀錄則無法確認。'))
+      return;
     await ledger.confirmZeroSpend();
     message('已確認今天沒有消費，記帳完成狀態已更新。');
     await render();

@@ -44,16 +44,28 @@ export const expenseSchema = draftSchema
     schemaVersion: z.literal(1),
   })
   .strict();
-const backupV1Schema = z.object({
-  schemaVersion: z.literal(1), exportedAt: z.iso.datetime(),
-  expenses: z.array(expenseSchema).max(20000),
-}).strict();
-const backupV2Schema = z.object({
-  schemaVersion: z.literal(2), exportedAt: z.iso.datetime(),
-  expenses: z.array(expenseSchema).max(20000),
-  zeroDays: z.array(z.object({ date: dateSchema, confirmed: z.literal(true) }).strict()).max(3660),
-  productLinks: z.array(z.object({ expenseId: z.uuid(), productId: z.uuid() }).strict()).max(20000),
-}).strict();
+const backupV1Schema = z
+  .object({
+    schemaVersion: z.literal(1),
+    exportedAt: z.iso.datetime(),
+    expenses: z.array(expenseSchema).max(20000),
+  })
+  .strict();
+const backupV2Schema = z
+  .object({
+    schemaVersion: z.literal(2),
+    exportedAt: z.iso.datetime(),
+    expenses: z.array(expenseSchema).max(20000),
+    zeroDays: z
+      .array(
+        z.object({ date: dateSchema, confirmed: z.literal(true) }).strict(),
+      )
+      .max(3660),
+    productLinks: z
+      .array(z.object({ expenseId: z.uuid(), productId: z.uuid() }).strict())
+      .max(20000),
+  })
+  .strict();
 export const backupSchema = z.union([backupV1Schema, backupV2Schema]);
 export const aiResultSchema = z
   .object({

@@ -910,9 +910,17 @@ footer {
   gap: 12px;
   margin: 18px 0 24px;
 }
-#analysis .panel { margin: 22px 0; }
-#analysis .panel h3 { margin: 22px 0 10px; font-size: 1rem; }
-#analysis .panel > label { display: block; margin: 15px 0; }
+#analysis .panel {
+  margin: 22px 0;
+}
+#analysis .panel h3 {
+  margin: 22px 0 10px;
+  font-size: 1rem;
+}
+#analysis .panel > label {
+  display: block;
+  margin: 15px 0;
+}
 #analysis .panel > label select,
 #analysis .panel > label input {
   display: block;
@@ -932,11 +940,28 @@ footer {
   padding: 10px 0;
   border-bottom: 1px solid #edf2ef;
 }
-.analysis-row strong { text-align: right; overflow-wrap: anywhere; }
-.analysis-note { margin: 12px 0; color: #647975; font-size: .9rem; }
-#analysis-market-result { padding-top: 12px; }
-#analysis-market-result > strong { color: #9b492e; }
+.analysis-row strong {
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+.analysis-note {
+  margin: 12px 0;
+  color: #647975;
+  font-size: 0.9rem;
+}
+#analysis-market-result {
+  padding-top: 12px;
+}
+#analysis-market-result > strong {
+  color: #9b492e;
+}
 @media (max-width: 600px) {
-  .analysis-row { align-items: flex-start; flex-direction: column; gap: 2px; }
-  .analysis-row strong { text-align: left; }
+  .analysis-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .analysis-row strong {
+    text-align: left;
+  }
 }

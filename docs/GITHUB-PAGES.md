@@ -1,5 +1,7 @@
 # GitHub Pages 相容性與發布前交接
 
+更新（2026-11-22）：使用者已另外明確批准第一版正式發布。以下「未授權」為前次隔離驗收的歷史記錄；最新授權與發布進度以 [發布紀錄](RELEASE.md) 為準。發布工作流程現已準備啟用，PR CI 仍只驗證與上傳預覽。
+
 版本註記：以下為先前相容性改造紀錄。最新第一版改為純本機規則解析、Pages 強制不連 API、不提供背景推播，授權可推送分支／提交 PR；以 [V1-ACCEPTANCE](V1-ACCEPTANCE.md) 為準。下列選用後端 URL 說明僅適用保留的 integration 測試版，不適用第一版發布。
 
 最終驗收（2026-11-22）：**PASS 本機發布準備**。乾淨 `npm ci`、完整 `npm run verify`、回歸 red/green、`npm audit --audit-level=high` 全部 exit 0；45 個程式測試、6 個原有 E2E、10 個 Pages E2E 全數成功，audit 0 漏洞。命令原始日誌、Node／npm 版本與執行時間見 [summary.json](evidence/pages/summary.json)。完整修改檔案清單見 [PAGES-CHANGES](PAGES-CHANGES.md)。

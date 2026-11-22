@@ -1,5 +1,7 @@
 # 第一版工程交接與驗收
 
+更新（2026-11-22）：使用者已明確授權合併 main、啟用 Pages 與正式發布；下列原先發布限制保留為當時驗收紀錄。最新進度以 [發布紀錄](RELEASE.md) 為準。PR #1 的 GitHub hosted CI 已通過 51 個程式測試、6 個原有 E2E、16 個 Pages E2E。
+
 本機最終驗收 **PASS**：乾淨安裝、ESLint／格式／邊界／機密／文件檢查、51 個程式測試、6 個原有 E2E、16 個 Pages／快速記帳 E2E、建置與回歸 red/green 均成功，audit 0 漏洞。實際版本、時間、命令與 exit code 見 [summary.json](evidence/v1/summary.json)，完整日誌見 [quality-and-e2e.txt](evidence/v1/quality-and-e2e.txt)。不將本機成功推論為公開 Pages 或真實 iPhone 成功。
 
 目標倉庫 `yongliancai/money`，main 保持使用者控制。開發分支 `feat/pages-v1-quick-entry`。本次授權包含 feature branch 推送與 PR，不含 main 合併、Pages 啟用、發布、擴權或費用資源。

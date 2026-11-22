@@ -22,7 +22,7 @@ test('read-only PR CI passes and active deployment actions or permissions are re
     }).length,
   );
 });
-test('inactive release template is manual, confirmed, build-gated and never present among active publishing workflows', () => {
+test('release workflows require manual confirmation, main and a successful build', () => {
   const template = parse(
     readFileSync(
       '.github/workflow-templates/pages-release.yml.disabled',

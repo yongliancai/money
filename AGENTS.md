@@ -1,5 +1,7 @@
 # AI 工程入口
 
+最新授權（2026-11-22）：使用者明確批准將 yongliancai/money 第一版合併 main、啟用 GitHub Pages 並正式發布，也批准必要的電腦操作。此一次發布授權取代下列歷史發布限制；仍須通過 CI，僅能手動觸發發布，不得擴大至其他資源、秘密或後續自動發布。詳見 [發布紀錄](docs/RELEASE.md)。
+
 先讀 [主工程規範](docs/PROJECT-ENGINEERING.md)、[已確認需求](docs/REQUIREMENTS.md)、[架構](docs/ARCHITECTURE.md) 與 [待決 ADR](docs/DECISIONS/README.md)。
 
 - 修改前理解需求；修復先重現，修改後執行受影響的測試。

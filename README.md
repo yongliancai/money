@@ -2,6 +2,8 @@
 
 Repository：yongliancai/money（原遠端 README：money）。
 
+正式網址：[日日記](https://yongliancai.github.io/money/)。使用者已批准第一版發布，最新部署驗證狀態見 [發布紀錄](docs/RELEASE.md)。
+
 免登入、單裝置、行動優先的本機帳本。完整帳本只保存在 IndexedDB，Express／SQLite 後端僅接收匿名裝置與提醒狀態。
 
 **第一版使用 JavaScript 規則解析，不使用 AI API 或後端定時推播。** 多行文字可離線解析，分類衝突由你選擇，所有候選都要確認後才儲存。目前未發布；完整交接與實測見 [第一版驗收](docs/V1-ACCEPTANCE.md)。

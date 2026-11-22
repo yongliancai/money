@@ -1,0 +1,23 @@
+
+Running 14 tests using 1 worker
+
+(node:40092) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 [chromium] › tests\published\batch1.spec.js:85:1 › published quick entry, CRUD, search, JSON restore/dedup, reload and offline entry (3.0s)
+  ok  2 [chromium] › tests\published\batch1.spec.js:156:1 › published same-product consent, five-sample median threshold, recalculation and mock market (1.8s)
+  ok  3 [chromium] › tests\published\batch1.spec.js:261:1 › published seven-day dates and totals plus today zero-spend confirmation and cancellation (823ms)
+  ok  4 [chromium] › tests\published\batch1.spec.js:296:3 › published month-to-date 18/20 date coverage enforces 70/90 policy (660ms)
+  ok  5 [chromium] › tests\published\batch1.spec.js:296:3 › published month-to-date 14/20 date coverage enforces 70/90 policy (659ms)
+  ok  6 [chromium] › tests\published\batch1.spec.js:296:3 › published month-to-date 13/20 date coverage enforces 70/90 policy (693ms)
+  ok  7 [chromium] › tests\published\batch1.spec.js:323:1 › published static PWA metadata and a seeded v1 database upgrade without deleting records (934ms)
+(node:564) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  8 [webkit] › tests\published\batch1.spec.js:85:1 › published quick entry, CRUD, search, JSON restore/dedup, reload and offline entry (5.5s)
+  ok  9 [webkit] › tests\published\batch1.spec.js:156:1 › published same-product consent, five-sample median threshold, recalculation and mock market (5.2s)
+  ok 10 [webkit] › tests\published\batch1.spec.js:261:1 › published seven-day dates and totals plus today zero-spend confirmation and cancellation (2.4s)
+  ok 11 [webkit] › tests\published\batch1.spec.js:296:3 › published month-to-date 18/20 date coverage enforces 70/90 policy (2.3s)
+  ok 12 [webkit] › tests\published\batch1.spec.js:296:3 › published month-to-date 14/20 date coverage enforces 70/90 policy (2.3s)
+  ok 13 [webkit] › tests\published\batch1.spec.js:296:3 › published month-to-date 13/20 date coverage enforces 70/90 policy (2.3s)
+  ok 14 [webkit] › tests\published\batch1.spec.js:323:1 › published static PWA metadata and a seeded v1 database upgrade without deleting records (1.2s)
+
+  14 passed (31.6s)
